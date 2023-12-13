@@ -1,4 +1,5 @@
-﻿using SoundVillage.Domain.Transacao.Agreggates;
+﻿using SoundVillage.Domain.Core.Abstracts;
+using SoundVillage.Domain.Transacao.Agreggates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SoundVillage.Domain.Conta.Agreggates
 {
-    public class Usuario
+    public class Usuario: BaseEntity
     {
         public string Nome { get; set; }
         public string Email { get; set; }
