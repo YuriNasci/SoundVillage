@@ -28,7 +28,7 @@ namespace SoundVillage.Domain.Transacao.Agreggates
             transacao.Merchant = merchant;
             transacao.Valor = valor;
             transacao.Descricao = Descricao;
-            transacao.DtTransacao = DateTime.Now;
+            transacao.DataTransacao = DateTime.Now;
 
             //Verifica limite disponivel
             this.VerificaLimite(transacao);
@@ -49,7 +49,7 @@ namespace SoundVillage.Domain.Transacao.Agreggates
         private void ValidarTransacao(Transacao transacao)
         {
             var ultimasTransacoes = this.Transacoes.Where(x =>
-                                                          x.DtTransacao >= DateTime.Now.AddMinutes(INTERVALO_TRANSACAO));
+                                                          x.DataTransacao >= DateTime.Now.AddMinutes(INTERVALO_TRANSACAO));
             if (ultimasTransacoes?.Count() >= 3)
                 throw new Exception("Cartão utilizado muitas vezes em um período curto");
 
