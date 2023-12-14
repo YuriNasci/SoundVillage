@@ -55,7 +55,7 @@ namespace SoundVillage.Domain.Transacao.Agreggates
 
             var transacaoRepetidaPorMerchant = ultimasTransacoes?
                                                 .Where(x => x.Merchant.Nome.ToUpper() == transacao.Merchant.Nome.ToUpper()
-                                                       && x.Valor == transacao.Valor)
+                                                       && x.Valor.Valor == transacao.Valor.Valor)
                                                 .Count() == REPETICAO_TRANSACAO_MERCHANT;
 
             if (transacaoRepetidaPorMerchant)
