@@ -10,7 +10,7 @@ namespace SoundVillage.Domain.Transacao.Aggregates
 {
     public class Cartao: BaseEntity
     {
-                private const int INTERVALO_TRANSACAO = -2;
+        private const int INTERVALO_TRANSACAO = -2;
         private const int REPETICAO_TRANSACAO_MERCHANT = 1;
 
         private bool Ativo {  get; set; }

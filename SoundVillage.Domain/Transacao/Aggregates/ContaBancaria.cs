@@ -61,7 +61,7 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         {
             Random random = new Random();
             // Gerar um número aleatório entre 1 e Número de cartões + 1
-            int randomNumber = random.Next(1, this.CartoesDeCredito.Count + 1);
+            int randomNumber = random.Next(1, this.CartoesDeCredito.Count + 2);
 
             // Se o número gerado for 1, retorna true, senão retorna false
             return randomNumber == 1;
