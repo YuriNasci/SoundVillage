@@ -1,6 +1,7 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
 using SoundVillage.Domain.Core.ValueObjects;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         private const int REPETICAO_TRANSACAO_MERCHANT = 1;
 
         private bool Ativo {  get; set; }
-        private Monetario LimiteDisponivel { get; set; }
+        public Monetario LimiteDisponivel { get; private set; }
         private string Numero { get; set; }
         private List<Transacao> Transacoes { get; set; } = new List<Transacao>();
         private ContaBancaria Conta { get; set; }
@@ -87,6 +88,16 @@ namespace SoundVillage.Domain.Transacao.Aggregates
             if (transacaoRepetidaPorMerchant)
                 throw new Exception("Transacao Duplicada para o mesmo cartão e o mesmo Comerciante");
 
+        }
+
+        public List<Transacao> GetTransacoes()
+        {
+            return this.Transacoes;
+        }
+
+        public Monetario GetLimiteDisponivel()
+        {
+            return this.LimiteDisponivel;
         }
     }
 }
