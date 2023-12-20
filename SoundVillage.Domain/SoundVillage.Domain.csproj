@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Streaming\Agreggates\" />
+    <Folder Include="Streaming\ValueObject\" />
     <Folder Include="Transacao\ValueObject\" />
   </ItemGroup>
 
