@@ -91,5 +91,21 @@ namespace SoudVillage.Tests.Domain
             Assert.Throws<System.Exception>(
                 () => cartao.CriarTransacao(contaDestino, cartao.LimiteDisponivel / 2));
         }
+
+        [Fact]
+        public void NaoDeveCriarTransacaoComCartaoInativo()
+        {
+            // Arrange: Configuração do ambiente de teste
+            var contaOrigem = new ContaBancaria("Buier Nouli Makobag", "38971070072");
+            var cartao = contaOrigem.SolicitarCartaoCredito();
+
+            var contaDestino = new ContaBancaria("Xaevu Cafosa Xeriu", "79004023062");
+
+            var valorTransacao = cartao.LimiteDisponivel / 2;
+
+            // Act & Assert: Execução da funcionalidade e verificação dos resultados
+            Assert.Throws<System.Exception>(
+                () => cartao.CriarTransacao(contaDestino, valorTransacao));
+        }
     }
 }
