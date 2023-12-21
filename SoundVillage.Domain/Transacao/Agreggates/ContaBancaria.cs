@@ -19,11 +19,6 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         private Monetario Saldo { get; set; }
         private string Cpf { get; set; }
 
-        
-        public ContaBancaria()
-        {
-        }
-
         public ContaBancaria(string Nome, string Cpf)
         {
             this.Nome = Nome;
