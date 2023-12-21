@@ -12,5 +12,6 @@ namespace SoundVillage.Domain.Conta
     {
         public string Nome {  get; set; }
         public List<Musica> Musicas { get; set; }
+        public ContaStreaming Conta { get; internal set; }
     }
 }
