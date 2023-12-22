@@ -1,13 +1,13 @@
-﻿using System;
+﻿using SoundVillage.Domain.Core.Abstracts;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundVillage.Domain.Core.ValueObject
+namespace SoundVillage.Domain.Core.ValueObjects
 {
-    public class Monetario
+    public record Monetario
     {
         public decimal Valor { get; set; }
 

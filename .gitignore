@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 *.dtmp
 *.bkp
+*.lock

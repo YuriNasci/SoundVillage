@@ -1,19 +1,14 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
-using SoundVillage.Domain.Core.ValueObject;
-using SoundVillage.Domain.Transacao.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SoundVillage.Domain.Core.ValueObjects;
 
-namespace SoundVillage.Domain.Transacao.Agreggates
+namespace SoundVillage.Domain.Transacao.Aggregates
 {
     public class Transacao: BaseEntity
     {
-        public DateTime DataTransacao { get; set; }
         public Monetario Valor { get; set; }
-        public String Descricao { get; set; }
-        public Merchant Merchant { get; set; }
+        public DateTime Horario { get; set; }
+        public ContaBancaria ContaOrigem { get; set; }
+        public ContaBancaria ContaDestino { get; set; }
+        public string Descricao { get; internal set; }
     }
 }

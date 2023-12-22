@@ -1,11 +1,7 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
-using SoundVillage.Domain.Core.ValueObject;
+using SoundVillage.Domain.Core.ValueObjects;
 using SoundVillage.Domain.Streaming.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SoundVillage.Domain.Transacao.Aggregates;
 
 namespace SoundVillage.Domain.Streaming.Agreggates
 {
@@ -16,5 +12,6 @@ namespace SoundVillage.Domain.Streaming.Agreggates
         public Monetario Valor { get; set; }
 
         public RecorrenciaPlano Recorrencia { get; set; }
+        public ContaBancaria ContaBancariaCobradora { get; set; }
     }
 }

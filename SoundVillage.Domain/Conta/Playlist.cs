@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundVillage.Domain.Conta.Agreggates
+namespace SoundVillage.Domain.Conta
 {
     public class Playlist: BaseEntity
     {
-        public string Nome { get; set; }
-        public Boolean Publica { get; set; }
-        public Usuario Usuario { get; set; }
+        public string Nome {  get; set; }
         public List<Musica> Musicas { get; set; }
+        public ContaStreaming Conta { get; internal set; }
     }
 }
