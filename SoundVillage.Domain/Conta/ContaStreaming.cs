@@ -55,7 +55,7 @@ namespace SoundVillage.Domain.Conta
         private void AdicionarCartao(Cartao cartao)
             => this.Cartoes.Add(cartao);
 
-        private void AssinarPlano(Plano plano, Cartao cartao)
+        public void AssinarPlano(Plano plano, Cartao cartao)
         {
             //Debitar o valor do plano no cartao
             cartao.CriarTransacao(plano.ContaBancariaCobradora, new Monetario(plano.Valor), plano.Descricao);

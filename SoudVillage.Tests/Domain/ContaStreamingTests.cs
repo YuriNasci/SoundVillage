@@ -83,5 +83,52 @@ namespace SoudVillage.Tests.Domain
             Assert.IsType<Exception>(exception);
             Assert.Contains("Cartão não possui limite para esta transacao", exception.Message, StringComparison.OrdinalIgnoreCase);
         }
+
+        [Fact]
+        public void DevePermitirApenasUmaAssinaturaAtualPorConta()
+        {
+            var contaDestino = new ContaBancaria("Xaevu Cafosa Xeriu", "79004023062");
+
+            var plano = new Plano()
+            {
+                ContaBancariaCobradora = contaDestino,
+                Descricao = "Free",
+                Nome = "Free",
+                Recorrencia = RecorrenciaPlano.MENSAL,
+                Valor = 0
+            };
+
+            var plano2 = new Plano()
+            {
+                ContaBancariaCobradora = contaDestino,
+                Descricao = "Basico",
+                Nome = "Basico",
+                Recorrencia = RecorrenciaPlano.MENSAL,
+                Valor = 50
+            };
+
+            var cartao = new Cartao(100, "1234567890", new ContaBancaria("Buier Nouli Makobag", "38971070072"));
+            cartao.AtivarCartao();
+
+            var contaStreaming = new ContaStreaming();
+
+            var nome = "Teste Usuario";
+            var email = "teste@usuario.com";
+            var senha = "senha123";
+            var dataNascimento = new DateTime(1990, 1, 1);
+
+            contaStreaming.CriarConta(nome, email, senha, dataNascimento, plano, cartao);
+
+            var assinatura1 = contaStreaming.Assinaturas.Last();
+
+            contaStreaming.AssinarPlano(plano2, contaStreaming.Cartoes.First()); // Esta linha deverá mudar o IsAtual da assinatura1 para false
+
+            var assinatura2 = contaStreaming.Assinaturas.Last();
+            // Assert
+            var assinaturasAtuais = contaStreaming.Assinaturas.Count(a => a.IsAtual);
+            Assert.Equal(1, assinaturasAtuais); // Deve haver apenas uma assinatura atual
+            Assert.True(assinatura2.IsAtual); // A assinatura2 deve ser a atual
+            Assert.False(assinatura1.IsAtual); // A assinatura1 não deve mais ser a atual
+        }
     }
 }

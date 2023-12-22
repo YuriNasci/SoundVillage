@@ -1,4 +1,6 @@
-﻿using SoundVillage.Domain.Transacao.Aggregates;
+﻿using SoundVillage.Domain.Core.ValueObjects;
+using SoundVillage.Domain.Notificacao;
+using SoundVillage.Domain.Transacao.Aggregates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,6 +108,25 @@ namespace SoudVillage.Tests.Domain
             // Act & Assert: Execução da funcionalidade e verificação dos resultados
             Assert.Throws<System.Exception>(
                 () => cartao.CriarTransacao(contaDestino, valorTransacao));
+        }
+
+        [Fact]
+        public void DeveCriarNotificacoesApropriadasAposTransacao()
+        {
+            // Arrange
+            var contaOrigem = new ContaBancaria("Buier Nouli Makobag", "38971070072");
+            var contaDestino = new ContaBancaria("Xaevu Cafosa Xeriu", "79004023062");
+            var cartao = new Cartao(1000, "1234567890", contaOrigem);
+            cartao.AtivarCartao();
+            var valorTransacao = new Monetario(100);
+
+            // Act
+            cartao.CriarTransacao(contaDestino, valorTransacao);
+
+            // Assert
+            // Verifique se as notificações foram criadas corretamente
+            Assert.Contains(contaOrigem.Notificacaos, n => n.Conta == contaOrigem && n.Mensagem.Contains("Pagamento de"));
+            Assert.Contains(contaDestino.Notificacaos, n => n.Conta == contaDestino && n.Mensagem.Contains("Recebimento de"));
         }
     }
 }
