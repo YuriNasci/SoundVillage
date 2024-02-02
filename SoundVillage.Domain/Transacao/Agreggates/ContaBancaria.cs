@@ -16,9 +16,9 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         private string NumeroAgencia { get; set; }
         private string NumeroConta { get; set; }
         private string Digito { get; set; }
-        private Monetario Saldo { get; set; }
+        public Monetario Saldo { get; set; }
         private string Cpf { get; set; }
-        public List<Notificacao.Notificacao> Notificacaos { get; set; } = new List<Domain.Notificacao.Notificacao>();
+        public List<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Domain.Notificacao.Notificacao>();
 
         public ContaBancaria(string Nome, string Cpf)
         {

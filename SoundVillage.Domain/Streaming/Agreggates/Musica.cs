@@ -1,4 +1,5 @@
-﻿using SoundVillage.Domain.Core.Abstracts;
+﻿using SoundVillage.Domain.Conta;
+using SoundVillage.Domain.Core.Abstracts;
 using SoundVillage.Domain.Streaming.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace SoundVillage.Domain.Streaming.Agreggates
     {
         public String Nome { get; set; }
         public Duracao Duracao { get; set; }
+        public List<Playlist> Playlists { get; set; }
     }
 }

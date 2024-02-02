@@ -17,8 +17,8 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         private bool Ativo {  get; set; }
         public Monetario LimiteDisponivel { get; private set; }
         private string Numero { get; set; }
-        private List<Transacao> Transacoes { get; set; } = new List<Transacao>();
-        private ContaBancaria Conta { get; set; }
+        public List<Transacao> Transacoes { get; set; } = new List<Transacao>();
+        public ContaBancaria Conta { get; set; }
 
         public Cartao(decimal limiteAprovado, string numero, ContaBancaria conta)
         {
@@ -62,11 +62,11 @@ namespace SoundVillage.Domain.Transacao.Aggregates
             //Notificar envolvidos
             string tituloPagamento = "Pagamento Efetuado";
             string mensagemPagamento = $"Pagamento de {valor} efetuado com sucesso.";
-            this.Conta.Notificacaos.Add(Notificacao.Notificacao.Criar(tituloPagamento, mensagemPagamento, this.Conta));
+            this.Conta.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloPagamento, mensagemPagamento, this.Conta));
 
             string tituloRecebimento = "Recebimento de Pagamento";
             string mensagemRecebimento = $"Recebimento de {valor} efetuado com sucesso.";
-            contaDestino.Notificacaos.Add(Notificacao.Notificacao.Criar(tituloRecebimento, mensagemRecebimento, contaDestino));
+            contaDestino.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloRecebimento, mensagemRecebimento, contaDestino));
         }
 
         private void IsCartaoAtivo()

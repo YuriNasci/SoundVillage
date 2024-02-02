@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Transacao\ValueObject\**" />
+    <EmbeddedResource Remove="Transacao\ValueObject\**" />
+    <None Remove="Transacao\ValueObject\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Streaming\Agreggates\" />
     <Folder Include="Streaming\ValueObject\" />
-    <Folder Include="Transacao\ValueObject\" />
   </ItemGroup>
 
 </Project>
