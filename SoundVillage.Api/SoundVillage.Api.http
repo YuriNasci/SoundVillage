@@ -1,0 +1,6 @@
+@SoundVillage.Api_HostAddress = http://localhost:5251
+
+GET {{SoundVillage.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

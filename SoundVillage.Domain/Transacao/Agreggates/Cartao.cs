@@ -14,9 +14,9 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         private const int INTERVALO_TRANSACAO = -2;
         private const int REPETICAO_TRANSACAO_MERCHANT = 1;
 
-        private bool Ativo {  get; set; }
-        public Monetario LimiteDisponivel { get; private set; }
-        private string Numero { get; set; }
+        public bool Ativo {  get; set; }
+        public Monetario LimiteDisponivel { get; set; }
+        public string Numero { get; set; }
         public List<Transacao> Transacoes { get; set; } = new List<Transacao>();
         public ContaBancaria Conta { get; set; }
 
@@ -26,6 +26,9 @@ namespace SoundVillage.Domain.Transacao.Aggregates
             Numero = numero;
             Ativo = false;
             Conta = conta;
+        }
+
+        public Cartao() {
         }
 
         public void AtivarCartao()

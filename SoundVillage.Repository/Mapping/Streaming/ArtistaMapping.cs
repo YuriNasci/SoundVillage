@@ -16,6 +16,7 @@ namespace SoundVillage.Repository.Mapping.Streaming
             builder.ToTable("Artistas");
 
             builder.HasKey(a => a.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
             builder.Property(a => a.Nome)
                 .IsRequired()

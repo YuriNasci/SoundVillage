@@ -20,7 +20,7 @@ namespace SoundVillage.Repository.Mapping.Conta
             builder.Property(x => x.IsAtual).IsRequired();
             builder.Property(x => x.Validade).IsRequired();
 
-            builder.HasOne(x => x.Plano).WithMany();
+            builder.HasOne(x => x.Plano).WithMany().OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(x => x.CartaoPagamento).WithMany(); 
         }
     }

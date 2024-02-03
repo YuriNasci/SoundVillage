@@ -21,7 +21,7 @@ namespace SoundVillage.Repository.Mapping.Notificacao
             builder.Property(x => x.DataNotificacao).IsRequired();
             builder.Property(x => x.Visualizada).IsRequired();
 
-            builder.HasOne(x => x.Conta).WithMany(x => x.Notificacoes).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Conta).WithMany(x => x.Notificacoes).IsRequired().OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
