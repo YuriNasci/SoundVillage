@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SoundVillage.Application\SoundVillage.Application.csproj" />
     <ProjectReference Include="..\SoundVillage.Repository\SoundVillage.Repository.csproj" />
   </ItemGroup>
 
