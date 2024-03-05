@@ -364,3 +364,4 @@ FodyWeavers.xsd
 *.dtmp
 *.bkp
 *.lock
+changes.diff

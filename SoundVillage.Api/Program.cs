@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SoundVillage.Application.Conta;
+using SoundVillage.Application.Streaming;
 using SoundVillage.Repository;
+using SoundVillage.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,15 @@ builder.Services.AddDbContext<SoundVillageContext>(c =>
 {
     c.UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnection"));
 });
+
+//Repositories
+builder.Services.AddScoped<ContaStreamingRepository>();
+builder.Services.AddScoped<PlanoRepository>();
+builder.Services.AddScoped<ArtistaRepository>();
+
+//Services
+builder.Services.AddScoped<ContaStreamingService>();
+builder.Services.AddScoped<ArtistaService>();
 
 var app = builder.Build();
 
