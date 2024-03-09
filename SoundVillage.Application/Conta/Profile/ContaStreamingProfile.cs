@@ -12,11 +12,22 @@ namespace SoundVillage.Application.Conta.Profile
     public class ContaStreamingProfile: AutoMapper.Profile
     {
         public ContaStreamingProfile() {
-            CreateMap<ContaStreamingDto, ContaStreaming>().
-                ReverseMap();
+            CreateMap<ContaStreamingDto, ContaStreaming>();
+
+            CreateMap<ContaStreaming, ContaStreamingDto>()
+            .AfterMap((s, d) =>
+            {
+                var plano = s.Assinaturas?.FirstOrDefault(a => a.IsAtual)?.Plano;
+
+                if (plano != null)
+                    d.PlanoId = plano.Id;
+
+                d.Senha = "xxxxxxxxx";
+
+            });
 
             CreateMap<CartaoDto, Cartao>()
-                .ForMember(x => x.LimiteDisponivel.Valor, m => m.MapFrom(f => f.LimiteDisponivel))
+                .ForPath(x => x.LimiteDisponivel.Valor, m => m.MapFrom(f => f.LimiteDisponivel))
                 .ReverseMap();
         }
     }

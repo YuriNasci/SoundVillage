@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SoundVillage.Application.Conta;
+using SoundVillage.Application.Conta.Profile;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Repository;
 using SoundVillage.Repository.Repository;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<SoundVillageContext>(c =>
 {
     c.UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnection"));
 });
+
+builder.Services.AddAutoMapper(typeof(ContaStreamingProfile).Assembly);
 
 //Repositories
 builder.Services.AddScoped<ContaStreamingRepository>();
