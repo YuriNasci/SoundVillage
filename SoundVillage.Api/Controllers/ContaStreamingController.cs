@@ -10,6 +10,7 @@ namespace SoundVillage.Api.Controllers
     [ApiController]
     public class ContaStreamingController : ControllerBase
     {
+        [HttpPost]
         public IActionResult Criar(ContaStreamingDto dto){
             if (ModelState is { IsValid: false })
                 return BadRequest();

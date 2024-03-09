@@ -46,6 +46,6 @@ namespace SoundVillage.Application.Conta
             var result = this.Mapper.Map<ContaStreamingDto>(conta);
 
             return result;
-        }
+        } 
     }
 }
