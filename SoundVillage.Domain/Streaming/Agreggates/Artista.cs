@@ -12,6 +12,9 @@ namespace SoundVillage.Domain.Streaming.Agreggates
         public string Nome { get; set; }
         public List<Album> Discografia { get; set; }
 
+        public string Descricao { get; set; }
+        public string Backdrop { get; set; }
+
         public void AdicionarAlbum(Album album) => 
             this.Discografia.Add(album);
     }

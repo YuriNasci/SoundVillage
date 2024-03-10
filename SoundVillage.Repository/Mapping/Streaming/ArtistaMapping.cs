@@ -22,6 +22,14 @@ namespace SoundVillage.Repository.Mapping.Streaming
                 .IsRequired()
                 .HasMaxLength(255);
 
+            builder.Property(a => a.Descricao)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            builder.Property(a => a.Backdrop)
+                .IsRequired()
+                .HasMaxLength(255);
+
             builder.HasMany(a => a.Discografia)
                 .WithOne() // Especifique a propriedade de navegação inversa na classe Album, se houver
                 .HasForeignKey("ArtistaId"); // Especifique o nome da chave estrangeira na tabela de álbuns, se necessário
