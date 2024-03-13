@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using SoundVillage.Domain.Streaming.Agreggates;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SoundVillage.Domain.Streaming.Aggregates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,28 +13,14 @@ namespace SoundVillage.Repository.Mapping.Streaming
     {
         public void Configure(EntityTypeBuilder<Artista> builder)
         {
-            builder.ToTable("Artistas");
+            builder.ToTable(nameof(Artista));
 
-            builder.HasKey(a => a.Id);
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
-            builder.Property(a => a.Nome)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.Property(a => a.Descricao)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.Property(a => a.Backdrop)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.HasMany(a => a.Discografia)
-                .WithOne() // Especifique a propriedade de navegação inversa na classe Album, se houver
-                .HasForeignKey("ArtistaId"); // Especifique o nome da chave estrangeira na tabela de álbuns, se necessário
-
-            // Outras configurações específicas do mapeamento podem ser adicionadas aqui
+            builder.Property(x => x.Nome).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Descricao).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Backdrop).IsRequired().HasMaxLength(50);
+            builder.HasMany<Album>(x => x.Albums).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

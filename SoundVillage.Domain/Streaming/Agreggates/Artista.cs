@@ -1,21 +1,20 @@
-﻿using SoundVillage.Domain.Core.Abstracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundVillage.Domain.Streaming.Agreggates
+namespace SoundVillage.Domain.Streaming.Aggregates
 {
-    public class Artista: BaseEntity
+    public class Artista
     {
-        public string Nome { get; set; }
-        public List<Album> Discografia { get; set; }
+        public Guid Id { get; set; }
+        public String Nome { get; set; }
+        public String Descricao { get; set; }
+        public String Backdrop { get; set; }
+        public virtual IList<Album> Albums { get; set; } = new List<Album>();
 
-        public string Descricao { get; set; }
-        public string Backdrop { get; set; }
-
-        public void AdicionarAlbum(Album album) => 
-            this.Discografia.Add(album);
+        public void AdicionarAlbum(Album album) =>
+            this.Albums.Add(album);
     }
 }

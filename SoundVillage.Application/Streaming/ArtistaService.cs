@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Dto;
-using SoundVillage.Domain.Streaming.Agreggates;
+using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Repository.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
 using static SoundVillage.Application.Dto.AlbumDto;
 
 namespace SoundVillage.Application.Streaming
@@ -73,7 +67,7 @@ namespace SoundVillage.Application.Streaming
                 throw new Exception("Artista não encontrada");
             }
 
-            var album = Artista.Discografia.FirstOrDefault(x => x.Id == id);
+            var album = Artista.Albums.FirstOrDefault(x => x.Id == id);
 
             var result = AlbumParaAlbumDto(album);
             result.ArtistaId = Artista.Id;
@@ -86,6 +80,7 @@ namespace SoundVillage.Application.Streaming
         {
             Album album = new Album()
             {
+                Id = dto.Id,
                 Nome = dto.Nome
             };
 
@@ -112,7 +107,7 @@ namespace SoundVillage.Application.Streaming
                 var musicaDto = new MusicDto()
                 {
                     Id = item.Id,
-                    Duracao = item.Duracao.Valor,
+                    Duracao = item.Duracao,
                     Nome = item.Nome
                 };
 

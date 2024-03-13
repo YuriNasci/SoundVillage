@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundVillage.Repository;
 
@@ -11,9 +12,11 @@ using SoundVillage.Repository;
 namespace SoundVillage.Repository.Migrations
 {
     [DbContext(typeof(SoundVillageContext))]
-    partial class SoundVillageContextModelSnapshot : ModelSnapshot
+    [Migration("20240313022208_'Duracao")]
+    partial class Duracao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,28 +159,31 @@ namespace SoundVillage.Repository.Migrations
                     b.ToTable("Notificacao", (string)null);
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Album", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Album", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Ano")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid?>("ArtistaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ArtistaId");
 
-                    b.ToTable("Album", (string)null);
+                    b.ToTable("Albums", (string)null);
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Artista", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Artista", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,25 +191,25 @@ namespace SoundVillage.Repository.Migrations
 
                     b.Property<string>("Backdrop")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artista", (string)null);
+                    b.ToTable("Artistas", (string)null);
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Musica", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Musica", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,6 +217,9 @@ namespace SoundVillage.Repository.Migrations
 
                     b.Property<Guid?>("AlbumId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Duracao")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -221,7 +230,7 @@ namespace SoundVillage.Repository.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.ToTable("Musica", (string)null);
+                    b.ToTable("Musicas", (string)null);
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Plano", b =>
@@ -349,7 +358,7 @@ namespace SoundVillage.Repository.Migrations
 
             modelBuilder.Entity("MusicaPlaylist", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Streaming.Aggregates.Musica", null)
+                    b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Musica", null)
                         .WithMany()
                         .HasForeignKey("MusicasId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,40 +422,19 @@ namespace SoundVillage.Repository.Migrations
                     b.Navigation("Conta");
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Album", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Album", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Streaming.Aggregates.Artista", null)
+                    b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Artista", null)
                         .WithMany("Albums")
                         .HasForeignKey("ArtistaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Musica", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Musica", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Streaming.Aggregates.Album", null)
+                    b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Album", null)
                         .WithMany("Musica")
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("SoundVillage.Domain.Streaming.ValueObject.Duracao", "Duracao", b1 =>
-                        {
-                            b1.Property<Guid>("MusicaId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Valor")
-                                .HasMaxLength(50)
-                                .HasColumnType("int");
-
-                            b1.HasKey("MusicaId");
-
-                            b1.ToTable("Musica");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MusicaId");
-                        });
-
-                    b.Navigation("Duracao")
-                        .IsRequired();
+                        .HasForeignKey("AlbumId");
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Plano", b =>
@@ -590,12 +578,12 @@ namespace SoundVillage.Repository.Migrations
                     b.Navigation("Playlists");
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Album", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Album", b =>
                 {
                     b.Navigation("Musica");
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Artista", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Streaming.Agreggates.Artista", b =>
                 {
                     b.Navigation("Albums");
                 });

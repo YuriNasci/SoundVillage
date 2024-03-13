@@ -1,10 +1,5 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
-using SoundVillage.Domain.Streaming.Agreggates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SoundVillage.Domain.Streaming.Aggregates;
 
 namespace SoundVillage.Domain.Conta
 {

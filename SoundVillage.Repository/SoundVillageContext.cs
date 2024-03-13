@@ -2,13 +2,9 @@
 using Microsoft.Extensions.Logging;
 using SoundVillage.Domain.Conta;
 using SoundVillage.Domain.Notificacao;
+using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Transacao.Aggregates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoundVillage.Repository
 {

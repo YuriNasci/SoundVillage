@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Streaming\Agreggates\" />
     <Folder Include="Streaming\ValueObject\" />
   </ItemGroup>
 

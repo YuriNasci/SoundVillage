@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using SoundVillage.Domain.Streaming.Agreggates;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SoundVillage.Domain.Streaming.Aggregates;
+using SoundVillage.Domain.Streaming.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +14,16 @@ namespace SoundVillage.Repository.Mapping.Streaming
     {
         public void Configure(EntityTypeBuilder<Album> builder)
         {
-            builder.ToTable("Albums");
+            builder.ToTable(nameof(Album));
 
-            builder.HasKey(a => a.Id);
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Nome).IsRequired().HasMaxLength(50);
 
-            builder.Property(a => a.Nome)
-                .IsRequired()
-                .HasMaxLength(255);
+            builder.HasMany(x => x.Musica).WithOne().OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(a => a.Ano)
-                .IsRequired();
 
-            builder.HasMany(a => a.Musica)
-                .WithOne() // Aqui você precisa especificar a propriedade de navegação inversa, se houver
-                .HasForeignKey("AlbumId"); // Especifique o nome da chave estrangeira aqui, se necessário
 
-            // Outras configurações específicas do mapeamento podem ser adicionadas aqui
         }
     }
 }
