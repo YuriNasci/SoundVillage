@@ -16,7 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SoundVillageContext>(c =>
 {
-    c.UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnection"));
+    c.UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnection"));
 });
 
 builder.Services.AddAutoMapper(typeof(ContaStreamingProfile).Assembly);

@@ -1,4 +1,0 @@
-dotnet ef database update -p ./SoundVillage.Repository/SoundVillage.Repository.csproj -s ./SoundVillage.Api/SoundVillage.Api.csproj
-dotnet ef migrations add Initial -c SoundVillageContext -p ./SoundVillage.Repository/SoundVillage.Repository.csproj -s ./SoundVillage.Api/SoundVillage.Api.csproj
-
-Pesquisar EntityFrameworkPowerTools

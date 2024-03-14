@@ -58,7 +58,7 @@ namespace SoundVillage.Application.Streaming
 
         }
 
-        public AlbumDto ObterAlbum(Guid idArtista, Guid id)
+        public AlbumDto? ObterAlbum(Guid idArtista, Guid id)
         {
             var Artista = this.ArtistaRepository.GetById(idArtista);
 
@@ -68,6 +68,8 @@ namespace SoundVillage.Application.Streaming
             }
 
             var album = Artista.Albums.FirstOrDefault(x => x.Id == id);
+
+            if (album == null) return null;
 
             var result = AlbumParaAlbumDto(album);
             result.ArtistaId = Artista.Id;

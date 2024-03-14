@@ -17,8 +17,8 @@ namespace SoundVillage.Domain.Transacao.Aggregates
         public bool Ativo {  get; set; }
         public Monetario LimiteDisponivel { get; set; }
         public string Numero { get; set; }
-        public List<Transacao> Transacoes { get; set; } = new List<Transacao>();
-        public ContaBancaria Conta { get; set; }
+        public virtual List<Transacao> Transacoes { get; set; } = new List<Transacao>();
+        public virtual ContaBancaria Conta { get; set; }
 
         public Cartao(decimal limiteAprovado, string numero, ContaBancaria conta)
         {

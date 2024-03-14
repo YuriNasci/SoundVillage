@@ -6,7 +6,7 @@ namespace SoundVillage.Domain.Conta
     public class Playlist: BaseEntity
     {
         public string Nome {  get; set; }
-        public List<Musica> Musicas { get; set; }
-        public ContaStreaming Conta { get; internal set; }
+        public virtual List<Musica> Musicas { get; set; }
+        public virtual ContaStreaming Conta { get; set; }
     }
 }

@@ -11,9 +11,9 @@ namespace SoundVillage.Domain.Conta
 {
     public class Assinatura: BaseEntity
     {
-        public Plano Plano { get; set; }
+        public virtual Plano Plano { get; set; }
         public DateTime Validade { get; set; }
-        public Cartao CartaoPagamento { get; set; }
+        public virtual Cartao CartaoPagamento { get; set; }
         public bool IsAtual {  get; set; }
     }
 }

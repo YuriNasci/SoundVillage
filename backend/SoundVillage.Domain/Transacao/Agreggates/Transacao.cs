@@ -7,8 +7,8 @@ namespace SoundVillage.Domain.Transacao.Aggregates
     {
         public Monetario Valor { get; set; }
         public DateTime Horario { get; set; }
-        public ContaBancaria ContaOrigem { get; set; }
-        public ContaBancaria ContaDestino { get; set; }
+        public virtual ContaBancaria ContaOrigem { get; set; }
+        public virtual ContaBancaria ContaDestino { get; set; }
         public string Descricao { get; internal set; }
     }
 }

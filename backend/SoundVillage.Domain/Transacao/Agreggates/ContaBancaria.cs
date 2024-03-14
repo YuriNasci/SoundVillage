@@ -11,14 +11,14 @@ namespace SoundVillage.Domain.Transacao.Aggregates
 {
     public class ContaBancaria: BaseEntity
     {
-        private List<Cartao> CartoesDeCredito { get; set; } = new List<Cartao>();
+        public virtual List<Cartao> CartoesDeCredito { get; set; } = new List<Cartao>();
         private string Nome { get; set; }
         private string NumeroAgencia { get; set; }
         private string NumeroConta { get; set; }
         private string Digito { get; set; }
         public Monetario Saldo { get; set; }
         private string Cpf { get; set; }
-        public List<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Domain.Notificacao.Notificacao>();
+        public virtual List<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Domain.Notificacao.Notificacao>();
 
         public ContaBancaria(string Nome, string Cpf)
         {

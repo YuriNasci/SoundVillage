@@ -10,7 +10,7 @@ namespace SoundVillage.Domain.Notificacao
 {
     public class Notificacao: BaseEntity
     {
-        public ContaBancaria Conta {  get; set; }
+        public virtual ContaBancaria Conta {  get; set; }
         public bool Visualizada { get; set; }
         public DateTime DataNotificacao { get; set; }
         public String Mensagem { get; set; }

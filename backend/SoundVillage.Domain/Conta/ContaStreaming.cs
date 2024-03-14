@@ -19,9 +19,9 @@ namespace SoundVillage.Domain.Conta
         public string Email { get; set; }
         public string Senha { get; set; }
         public DateTime DataNascimento { get; set; }
-        public List<Cartao> Cartoes { get; set; } = new List<Cartao>();
-        public List<Assinatura> Assinaturas { get; set; } = new List<Assinatura>();
-        public List<Playlist> Playlists { get; set; } = new List<Playlist>();
+        public virtual List<Cartao> Cartoes { get; set; } = new List<Cartao>();
+        public virtual List<Assinatura> Assinaturas { get; set; } = new List<Assinatura>();
+        public virtual List<Playlist> Playlists { get; set; } = new List<Playlist>();
 
         public void CriarConta(string nome, string email, string senha, DateTime dtNascimento, Plano plano, Cartao cartao)
         {

@@ -11,7 +11,7 @@ namespace SoundVillage.Domain.Streaming.Agreggates
         public String Descricao { get; set; }
         public Monetario Valor { get; set; }
 
-        public RecorrenciaPlano Recorrencia { get; set; }
-        public ContaBancaria ContaBancariaCobradora { get; set; }
+        public virtual RecorrenciaPlano Recorrencia { get; set; }
+        public virtual ContaBancaria ContaBancariaCobradora { get; set; }
     }
 }
