@@ -46,6 +46,13 @@ namespace SoundVillage.Application.Conta
             var result = this.Mapper.Map<ContaStreamingDto>(conta);
 
             return result;
-        } 
+        }
+
+        public ContaStreamingDto Obter(Guid id)
+        {
+            var contaStreaming = this.ContaStreamingRepository.GetById(id);
+            var result = this.Mapper.Map<ContaStreamingDto>(contaStreaming);
+            return result;
+        }
     }
 }
