@@ -42,8 +42,6 @@ namespace SoundVillage.Repository.Mapping.Transacao
             builder.HasMany(c => c.Notificacoes)
                 .WithOne() // Especifique a propriedade de navegação inversa em Notificacao, se houver
                 .HasForeignKey("ContaBancariaId"); // Ajuste conforme a sua estrutura de banco de dados
-
-            // O mapeamento de outras propriedades e configurações específicas podem ser adicionadas aqui
         }
     }
 }

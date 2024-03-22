@@ -26,6 +26,7 @@ builder.Services.AddAutoMapper(typeof(ContaStreamingProfile).Assembly);
 builder.Services.AddScoped<ContaStreamingRepository>();
 builder.Services.AddScoped<PlanoRepository>();
 builder.Services.AddScoped<ArtistaRepository>();
+builder.Services.AddScoped<CartaoRepository>();
 
 //Services
 builder.Services.AddScoped<ContaStreamingService>();

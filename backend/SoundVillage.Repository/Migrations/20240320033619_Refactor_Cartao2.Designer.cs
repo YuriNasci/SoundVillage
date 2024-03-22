@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundVillage.Repository;
 
@@ -11,9 +12,11 @@ using SoundVillage.Repository;
 namespace SoundVillage.Repository.Migrations
 {
     [DbContext(typeof(SoundVillageContext))]
-    partial class SoundVillageContextModelSnapshot : ModelSnapshot
+    [Migration("20240320033619_Refactor_Cartao2")]
+    partial class Refactor_Cartao2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,6 +272,9 @@ namespace SoundVillage.Repository.Migrations
                     b.Property<Guid>("ContaBancariaId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ContaBancariaId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("ContaStreamingId")
                         .HasColumnType("uniqueidentifier");
 
@@ -280,9 +286,11 @@ namespace SoundVillage.Repository.Migrations
 
                     b.HasIndex("ContaBancariaId");
 
+                    b.HasIndex("ContaBancariaId1");
+
                     b.HasIndex("ContaStreamingId");
 
-                    b.ToTable("Cartao", (string)null);
+                    b.ToTable("Cartoes", (string)null);
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", b =>
@@ -485,9 +493,15 @@ namespace SoundVillage.Repository.Migrations
 
             modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Cartao", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancaria")
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", null)
                         .WithMany("CartoesDeCredito")
                         .HasForeignKey("ContaBancariaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancaria")
+                        .WithMany()
+                        .HasForeignKey("ContaBancariaId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -506,7 +520,7 @@ namespace SoundVillage.Repository.Migrations
 
                             b1.HasKey("CartaoId");
 
-                            b1.ToTable("Cartao");
+                            b1.ToTable("Cartoes");
 
                             b1.WithOwner()
                                 .HasForeignKey("CartaoId");

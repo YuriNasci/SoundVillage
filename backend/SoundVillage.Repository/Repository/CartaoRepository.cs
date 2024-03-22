@@ -1,0 +1,16 @@
+﻿using SoundVillage.Domain.Transacao.Aggregates;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SoundVillage.Repository.Repository
+{
+    public class CartaoRepository : RepositoryBase<Cartao>
+    {
+        public CartaoRepository(SoundVillageContext context) : base(context)
+        {
+        }
+    }
+}

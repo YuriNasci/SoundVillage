@@ -13,7 +13,7 @@ namespace SoundVillage.Repository.Mapping.Transacao
     {
         public void Configure(EntityTypeBuilder<Cartao> builder)
         {
-            builder.ToTable("Cartoes");
+            builder.ToTable(nameof(Cartao));
 
             builder.HasKey(c => c.Id);
 
@@ -26,10 +26,6 @@ namespace SoundVillage.Repository.Mapping.Transacao
 
             builder.Property<string>("Numero")
                 .IsRequired();
-
-            builder.HasOne(c => c.Conta)
-                .WithMany()
-                .HasForeignKey("ContaBancariaId"); // Ajuste conforme a sua estrutura de banco de dados
 
             // Mapeamento da lista de Transacoes
             // Assumindo que Transacao é uma entidade com seu próprio mapeamento

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using SoundVillage.Application.Conta.Request;
 using SoundVillage.Domain.Conta;
 using SoundVillage.Domain.Streaming.Agreggates;
@@ -17,12 +19,15 @@ namespace SoundVillage.Application.Conta
         private IMapper Mapper { get; set; }
         private ContaStreamingRepository ContaStreamingRepository { get; set; }
         private PlanoRepository PlanoRepository { get; set; }
-
-        public ContaStreamingService(IMapper mapper, ContaStreamingRepository contaStreamingRepository, PlanoRepository planoRepository)
+        private CartaoRepository CartaoRepository { get; set; }
+      
+        public ContaStreamingService(IMapper mapper, ContaStreamingRepository contaStreamingRepository, 
+            PlanoRepository planoRepository, CartaoRepository cartaoRepository)
         {
             Mapper = mapper;
             ContaStreamingRepository = contaStreamingRepository;
             PlanoRepository = planoRepository;
+            CartaoRepository = cartaoRepository;
         }
 
         public ContaStreamingDto Criar(ContaStreamingDto dto)
@@ -36,16 +41,27 @@ namespace SoundVillage.Application.Conta
             if (plano == null)
                 throw new Exception("Plano não existente ou não encontrado");
 
-            Cartao cartao = this.Mapper.Map<Cartao>(dto.Cartao);
+            try
+            {
+                Cartao cartao = this.CartaoRepository.GetById(dto.Cartao.Id);
 
-            ContaStreaming conta = new ContaStreaming();
-            conta.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
+                if (cartao == null)
+                    throw new Exception("Cartão não existente ou não encontrado");
 
-            //TODO: GRAVAR MA BASE DE DADOS
-            this.ContaStreamingRepository.Save(conta);
-            var result = this.Mapper.Map<ContaStreamingDto>(conta);
+                ContaStreaming conta = new ContaStreaming();
+                conta.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
 
-            return result;
+                //TODO: GRAVAR MA BASE DE DADOS
+                this.ContaStreamingRepository.Save(conta);
+                var result = this.Mapper.Map<ContaStreamingDto>(conta);
+
+                return result;
+            } catch (SqlException ex) {
+                throw ex;
+            } catch (DbUpdateConcurrencyException ex)
+            {
+                throw ex;
+            }
         }
 
         public ContaStreamingDto Obter(Guid id)
