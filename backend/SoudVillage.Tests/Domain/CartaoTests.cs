@@ -125,8 +125,8 @@ namespace SoudVillage.Tests.Domain
 
             // Assert
             // Verifique se as notificações foram criadas corretamente
-            Assert.Contains(contaOrigem.Notificacoes, n => n.Conta == contaOrigem && n.Mensagem.Contains("Pagamento de"));
-            Assert.Contains(contaDestino.Notificacoes, n => n.Conta == contaDestino && n.Mensagem.Contains("Recebimento de"));
+            Assert.Contains(contaOrigem.Notificacoes, n => n.ContaBancaria == contaOrigem && n.Mensagem.Contains("Pagamento de"));
+            Assert.Contains(contaDestino.Notificacoes, n => n.ContaBancaria == contaDestino && n.Mensagem.Contains("Recebimento de"));
         }
     }
 }

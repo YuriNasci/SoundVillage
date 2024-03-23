@@ -51,7 +51,6 @@ namespace SoundVillage.Application.Conta
                 ContaStreaming conta = new ContaStreaming();
                 conta.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
 
-                //TODO: GRAVAR MA BASE DE DADOS
                 this.ContaStreamingRepository.Save(conta);
                 var result = this.Mapper.Map<ContaStreamingDto>(conta);
 

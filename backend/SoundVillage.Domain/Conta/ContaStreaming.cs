@@ -57,8 +57,9 @@ namespace SoundVillage.Domain.Conta
 
         public void AssinarPlano(Plano plano, Cartao cartao)
         {
-            //Debitar o valor do plano no cartao
-            cartao.CriarTransacao(plano.ContaBancariaCobradora, new Monetario(plano.Valor), plano.Descricao);
+            if (plano.Valor > 0)
+                //Debitar o valor do plano no cartao
+                cartao.CriarTransacao(plano.ContaBancariaCobradora, new Monetario(plano.Valor), plano.Descricao);
 
             //Desativo caso tenha alguma assinatura ativa
             DesativarAssinaturaAtiva();
@@ -68,7 +69,8 @@ namespace SoundVillage.Domain.Conta
             {
                 IsAtual = true,
                 Plano = plano,
-                Validade = GetValidadeByRecorrenciaPlano(plano.Recorrencia)
+                Validade = GetValidadeByRecorrenciaPlano(plano.Recorrencia),
+                CartaoPagamento = cartao
             });
         }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundVillage.Repository;
 
@@ -11,9 +12,11 @@ using SoundVillage.Repository;
 namespace SoundVillage.Repository.Migrations
 {
     [DbContext(typeof(SoundVillageContext))]
-    partial class SoundVillageContextModelSnapshot : ModelSnapshot
+    [Migration("20240323002519_Notificacao")]
+    partial class Notificacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,7 +131,7 @@ namespace SoundVillage.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ContaBancariaId")
+                    b.Property<Guid>("ContaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataNotificacao")
@@ -149,7 +152,7 @@ namespace SoundVillage.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContaBancariaId");
+                    b.HasIndex("ContaId");
 
                     b.ToTable("Notificacao", (string)null);
                 });
@@ -396,13 +399,13 @@ namespace SoundVillage.Repository.Migrations
 
             modelBuilder.Entity("SoundVillage.Domain.Notificacao.Notificacao", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancaria")
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "Conta")
                         .WithMany("Notificacoes")
-                        .HasForeignKey("ContaBancariaId")
+                        .HasForeignKey("ContaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ContaBancaria");
+                    b.Navigation("Conta");
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Streaming.Aggregates.Album", b =>

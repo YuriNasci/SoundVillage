@@ -62,14 +62,15 @@ namespace SoundVillage.Domain.Transacao.Aggregates
 
             this.Transacoes.Add(transacao);
 
+            //TO DO:
             //Notificar envolvidos
-            string tituloPagamento = "Pagamento Efetuado";
-            string mensagemPagamento = $"Pagamento de {valor} efetuado com sucesso.";
-            this.ContaBancaria.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloPagamento, mensagemPagamento, this.ContaBancaria));
+            //string tituloPagamento = "Pagamento Efetuado";
+            //string mensagemPagamento = $"Pagamento de {valor} efetuado com sucesso.";
+            //this.ContaBancaria.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloPagamento, mensagemPagamento, this.ContaBancaria));
 
-            string tituloRecebimento = "Recebimento de Pagamento";
-            string mensagemRecebimento = $"Recebimento de {valor} efetuado com sucesso.";
-            contaDestino.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloRecebimento, mensagemRecebimento, contaDestino));
+            //string tituloRecebimento = "Recebimento de Pagamento";
+            //string mensagemRecebimento = $"Recebimento de {valor} efetuado com sucesso.";
+            //contaDestino.Notificacoes.Add(Notificacao.Notificacao.Criar(tituloRecebimento, mensagemRecebimento, contaDestino));
         }
 
         private void IsCartaoAtivo()

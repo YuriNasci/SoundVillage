@@ -10,7 +10,7 @@ namespace SoundVillage.Domain.Notificacao
 {
     public class Notificacao: BaseEntity
     {
-        public virtual ContaBancaria Conta {  get; set; }
+        public virtual ContaBancaria ContaBancaria {  get; set; }
         public bool Visualizada { get; set; }
         public DateTime DataNotificacao { get; set; }
         public String Mensagem { get; set; }
@@ -29,7 +29,7 @@ namespace SoundVillage.Domain.Notificacao
                 DataNotificacao = DateTime.Now,
                 Mensagem = mensagem,
                 Titulo = titulo,
-                Conta = conta
+                ContaBancaria = conta
             };
         }
     }

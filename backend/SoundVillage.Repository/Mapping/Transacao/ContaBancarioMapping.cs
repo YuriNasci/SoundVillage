@@ -13,7 +13,7 @@ namespace SoundVillage.Repository.Mapping.Transacao
     {
         public void Configure(EntityTypeBuilder<ContaBancaria> builder)
         {
-            builder.ToTable("ContasBancarias");
+            builder.ToTable(nameof(ContaBancaria));
 
             builder.HasKey(c => c.Id);
 
@@ -38,10 +38,6 @@ namespace SoundVillage.Repository.Mapping.Transacao
 
             builder.Property<string>("Cpf")
                 .IsRequired();
-
-            builder.HasMany(c => c.Notificacoes)
-                .WithOne() // Especifique a propriedade de navegação inversa em Notificacao, se houver
-                .HasForeignKey("ContaBancariaId"); // Ajuste conforme a sua estrutura de banco de dados
         }
     }
 }
