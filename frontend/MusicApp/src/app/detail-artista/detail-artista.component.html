@@ -1,1 +1,18 @@
 <p>detail-artista works!</p>
+<div *ngIf="artista != undefined">
+    <span>Nome: {{artista.nome}}</span>
+    <br />
+    <span>Descrição: {{artista.descricao}}</span>
+    <img [src]="artista.backdrop">
+</div>
+
+<mat-accordion >
+    <mat-expansion-panel hideToggle *ngFor="let album of albuns" >
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+               Album: {{album.nome}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p *ngFor="let music of album.musicas">Musica: {{music.nome}}</p>
+    </mat-expansion-panel>
+</mat-accordion>
