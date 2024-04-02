@@ -58,7 +58,7 @@ namespace SoundVillage.Application.Streaming
 
         }
 
-        public AlbumDto? ObterAlbum(Guid idArtista, Guid id)
+        public AlbumDto ObterAlbumPorId(Guid idArtista, Guid id)
         {
             var Artista = this.ArtistaRepository.GetById(idArtista);
 
@@ -73,6 +73,26 @@ namespace SoundVillage.Application.Streaming
 
             var result = AlbumParaAlbumDto(album);
             result.ArtistaId = Artista.Id;
+
+            return result;
+
+        }
+
+        public List<AlbumDto> ObterAlbum(Guid idBanda)
+        {
+            var banda = this.ArtistaRepository.GetById(idBanda);
+
+            if (banda == null)
+            {
+                throw new Exception("Banda não encontrada");
+            }
+
+            var result = new List<AlbumDto>();
+
+            foreach (var item in banda.Albums)
+            {
+                result.Add(AlbumParaAlbumDto(item));
+            }
 
             return result;
 

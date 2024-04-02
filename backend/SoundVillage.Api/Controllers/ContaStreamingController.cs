@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SoundVillage.Application.Conta;
 using SoundVillage.Application.Conta.Request;
-using SoundVillage.Domain.Conta;
 
 namespace SoundVillage.Api.Controllers
 {
@@ -19,7 +17,8 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(ContaStreamingDto dto){
+        public IActionResult Criar(ContaStreamingDto dto)
+        {
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
@@ -38,5 +37,24 @@ namespace SoundVillage.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] Request.LoginRequest login)
+        {
+            if (ModelState.IsValid == false)
+                return BadRequest();
+
+            var result = this._contaStreamingService.Autenticar(login.Email, login.Senha);
+
+            if (result == null)
+            {
+                return BadRequest(new
+                {
+                    Error = "email ou senha inválidos"
+                });
+            }
+
+            return Ok(result);
+
+        }
     }
 }

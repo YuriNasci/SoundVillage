@@ -6,11 +6,7 @@ using SoundVillage.Domain.Conta;
 using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Transacao.Aggregates;
 using SoundVillage.Repository.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SoundVillage.Domain.Core.Extension;
 
 namespace SoundVillage.Application.Conta
 {
@@ -67,6 +63,13 @@ namespace SoundVillage.Application.Conta
         {
             var contaStreaming = this.ContaStreamingRepository.GetById(id);
             var result = this.Mapper.Map<ContaStreamingDto>(contaStreaming);
+            return result;
+        }
+
+        public ContaStreamingDto Autenticar(String email, String senha)
+        {
+            var usuario = this.ContaStreamingRepository.Find(x => x.Email == email && x.Senha == senha.HashSHA256()).FirstOrDefault();
+            var result = this.Mapper.Map<ContaStreamingDto>(usuario);
             return result;
         }
     }

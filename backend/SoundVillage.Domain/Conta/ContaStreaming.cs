@@ -1,4 +1,5 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
+using SoundVillage.Domain.Core.Extension;
 using SoundVillage.Domain.Core.ValueObjects;
 using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Streaming.ValueObject;
@@ -104,13 +105,7 @@ namespace SoundVillage.Domain.Conta
 
         private String CriptografarSenha(string senhaAberta)
         {
-            SHA256 criptoProvider = SHA256.Create();
-
-            byte[] btexto = Encoding.UTF8.GetBytes(senhaAberta);
-
-            var criptoResult = criptoProvider.ComputeHash(btexto);
-
-            return Convert.ToHexString(criptoResult);
+            return senhaAberta.HashSHA256();
         }
     }
 }

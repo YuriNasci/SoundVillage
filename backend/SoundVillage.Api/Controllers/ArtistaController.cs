@@ -63,9 +63,21 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpGet("{idArtista}/albums/{id}")]
-        public IActionResult ObterAlbum(Guid idArtista, Guid id)
+        public IActionResult ObterAlbumPorId(Guid idArtista, Guid id)
         {
-            var result = this._artistaService.ObterAlbum(idArtista, id);
+            var result = this._artistaService.ObterAlbumPorId(idArtista, id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+
+        }
+
+        [HttpGet("{idBanda}/albums")]
+        public IActionResult ObterAlbuns(Guid idBanda)
+        {
+            var result = this._artistaService.ObterAlbum(idBanda);
 
             if (result == null)
                 return NotFound();
