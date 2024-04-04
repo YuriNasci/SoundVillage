@@ -1,27 +1,26 @@
 <!-- cadastro.component.html -->
+<div class="example-container" style="margin-left: 15px;">
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <input formControlName="nome" matInput placeholder="Nome">
+        </mat-form-field>
 
-<form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <input formControlName="senha" matInput placeholder="Senha" type="password">
+        </mat-form-field>
 
-    <mat-form-field>
-      <input formControlName="nome" matInput placeholder="Nome">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input formControlName="senha" matInput placeholder="Senha" type="password">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input formControlName="nascimento" matInput placeholder="Data de Nascimento">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-select formControlName="plano">
-        <mat-option value="basico">Plano Básico</mat-option>
-        <mat-option value="premium">Plano Premium</mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <button mat-raised-button color="primary">Cadastrar</button>
-  
-  </form>
+        <mat-form-field>
+            <input formControlName="nascimento" matInput placeholder="Data de Nascimento">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select formControlName="plano">
+                <mat-option value="basico">Plano Básico</mat-option>
+                <mat-option value="premium">Plano Premium</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Cadastrar</button>
+    </form>
+  </div>
   
