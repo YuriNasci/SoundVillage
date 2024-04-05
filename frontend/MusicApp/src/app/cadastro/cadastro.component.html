@@ -2,25 +2,37 @@
 <div class="example-container" style="margin-left: 15px;">
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-            <input formControlName="nome" matInput placeholder="Nome">
+            <mat-label>Nome</mat-label>
+            <input formControlName="nome" matInput placeholder="Nome"> 
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input formControlName="email" matInput placeholder="E-mail"> 
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Senha</mat-label>
             <input formControlName="senha" matInput placeholder="Senha" type="password">
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="nascimento" matInput placeholder="Data de Nascimento">
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput formControlName="nascimento" [matDatepicker]="picker" placeholder="DD/MM/AAAA">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-
+        
         <mat-form-field>
+            <mat-label>Plano</mat-label>
             <mat-select formControlName="plano">
-                <mat-option value="basico">Plano Básico</mat-option>
-                <mat-option value="premium">Plano Premium</mat-option>
+              @for (plano of planos; track plano) {
+                <mat-option [value]="plano.value">{{plano.viewValue}}</mat-option>
+              }
             </mat-select>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary">Cadastrar</button>
+          </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary">Avançar</button>
     </form>
   </div>
   

@@ -4,11 +4,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, MatIconModule, MatButtonModule, MatGridListModule],
+  imports: [RouterOutlet, MatToolbarModule, MatIconModule, MatButtonModule, MatGridListModule, MatInputModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 
