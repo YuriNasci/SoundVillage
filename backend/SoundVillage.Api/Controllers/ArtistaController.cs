@@ -11,7 +11,6 @@ namespace SoundVillage.Api.Controllers
     [ApiController]
     public class ArtistaController : ControllerBase
     {
-        private SoundVillageContext Context { get; set; }
         private ArtistaService _artistaService;
         
         public ArtistaController(ArtistaService artistaService)

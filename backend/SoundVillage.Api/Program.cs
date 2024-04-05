@@ -31,6 +31,7 @@ builder.Services.AddScoped<CartaoRepository>();
 //Services
 builder.Services.AddScoped<ContaStreamingService>();
 builder.Services.AddScoped<ArtistaService>();
+builder.Services.AddScoped<PlanoService>();
 
 var app = builder.Build();
 

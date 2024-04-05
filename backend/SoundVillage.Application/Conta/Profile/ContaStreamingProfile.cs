@@ -1,5 +1,7 @@
-﻿using SoundVillage.Application.Conta.Request;
+﻿using SoundVillage.Application.Conta.Dto;
+using SoundVillage.Application.Conta.Request;
 using SoundVillage.Domain.Conta;
+using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Transacao.Aggregates;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,8 @@ namespace SoundVillage.Application.Conta.Profile
             CreateMap<CartaoDto, Cartao>()
                 .ForPath(x => x.LimiteDisponivel.Valor, m => m.MapFrom(f => f.LimiteDisponivel))
                 .ReverseMap();
+
+            CreateMap<Plano, PlanoDto>();
         }
     }
 }
