@@ -25,14 +25,40 @@
         
         <mat-form-field>
             <mat-label>Plano</mat-label>
-            <mat-select formControlName="plano">
+            <mat-select formControlName="plano" (selectionChange)="onPlanoSelected($event)">
               @for (plano of planos; track plano) {
-                <mat-option [value]="plano.value">{{plano.viewValue}}</mat-option>
+                <mat-option [value]="plano.id">{{plano.nome}}</mat-option>
               }
             </mat-select>
           </mat-form-field>
         <br>
-        <button mat-raised-button color="primary">Avançar</button>
+        <div *ngIf="showCreditCardForm">
+
+          <h2>Dados do Cartão</h2>
+
+          <mat-form-field>
+            <mat-label>Número do Cartão</mat-label>
+            <input matInput formControlName="numeroCartao" placeholder="0000 0000 0000 0000">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Nome impresso no cartão</mat-label>
+            <input matInput formControlName="nomeCartao" placeholder="João da Silva">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Data de validade</mat-label>
+            <input matInput formControlName="validadeCartao" placeholder="MM/AA">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Código de segurança</mat-label>
+            <input matInput formControlName="codigoSeguranca" placeholder="000">
+          </mat-form-field>
+        
+        </div>
+        
+        <button mat-raised-button color="primary">Cadastrar</button>
     </form>
   </div>
   
