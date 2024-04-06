@@ -12,5 +12,10 @@ namespace SoundVillage.Repository.Repository
         public CartaoRepository(SoundVillageContext context) : base(context)
         {
         }
+
+        public Cartao? GetByNumero(string numeroCartao)
+        {
+            return Context.Cartoes.FirstOrDefault(c => c.Numero == numeroCartao);
+        }
     }
 }

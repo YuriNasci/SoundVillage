@@ -16,7 +16,9 @@ namespace SoundVillage.Application.Conta.Request
         [Required]
         public DateTime DataNascimento { get; set; }
         public Guid PlanoId { get; set; }
-        [Required]
-        public CartaoDto Cartao { get; set; }
+        public string NumeroCartao { get; set; }
+        public string NomeCartao { get; set; }
+        public DateTime ValidadeCartao { get; set; }
+        public string CodigoSeguranca { get; set; }
     }
 }

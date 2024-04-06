@@ -39,7 +39,7 @@ namespace SoundVillage.Application.Conta
 
             try
             {
-                Cartao cartao = this.CartaoRepository.GetById(dto.Cartao.Id);
+                Cartao? cartao = this.CartaoRepository.GetByNumero(dto.NumeroCartao);
 
                 if (cartao == null)
                     throw new Exception("Cartão não existente ou não encontrado");
