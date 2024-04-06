@@ -19,18 +19,18 @@ namespace SoundVillage.Application.Conta.Profile
             CreateMap<ContaStreaming, ContaStreamingDto>()
             .AfterMap((s, d) =>
             {
-                var plano = s.Assinaturas?.FirstOrDefault(a => a.IsAtual)?.Plano;
+                //var plano = s.Assinaturas?.FirstOrDefault(a => a.IsAtual)?.Plano;
 
-                if (plano != null)
-                    d.PlanoId = plano.Id;
+                //if (plano != null)
+                //    d.PlanoId = plano.Id.ToString();
 
                 d.Senha = "xxxxxxxxx";
 
             });
 
-            CreateMap<CartaoDto, Cartao>()
-                .ForPath(x => x.LimiteDisponivel.Valor, m => m.MapFrom(f => f.LimiteDisponivel))
-                .ReverseMap();
+            //CreateMap<CartaoDto, Cartao>()
+            //    .ForPath(x => x.LimiteDisponivel.Valor, m => m.MapFrom(f => f.LimiteDisponivel))
+            //    .ReverseMap();
 
             CreateMap<Plano, PlanoDto>();
         }

@@ -1,6 +1,12 @@
 export interface Usuario {
-    id?:String;
-    nome?:String;
-    email?:String;
-    dtNascimento?:String;
+    id:string;
+    nome:string;
+    email:string;
+    senha: string;
+    dataNascimento?:Date;
+    planoId: string;
+    nomeCartao?:string;
+    numeroCartao?:string;
+    validadeCartao?:Date;
+    codigoSeguranca?:string;
 }

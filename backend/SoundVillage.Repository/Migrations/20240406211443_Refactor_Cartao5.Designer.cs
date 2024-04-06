@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundVillage.Repository;
 
@@ -11,9 +12,11 @@ using SoundVillage.Repository;
 namespace SoundVillage.Repository.Migrations
 {
     [DbContext(typeof(SoundVillageContext))]
-    partial class SoundVillageContextModelSnapshot : ModelSnapshot
+    [Migration("20240406211443_Refactor_Cartao5")]
+    partial class Refactor_Cartao5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +78,9 @@ namespace SoundVillage.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CartaoPagamentoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsAtual")
                         .HasColumnType("bit");
 
@@ -88,6 +94,8 @@ namespace SoundVillage.Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartaoPagamentoId");
 
                     b.HasIndex("PlanoId");
 
@@ -131,6 +139,9 @@ namespace SoundVillage.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ContaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -140,6 +151,8 @@ namespace SoundVillage.Repository.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -377,26 +390,42 @@ namespace SoundVillage.Repository.Migrations
 
             modelBuilder.Entity("SoundVillage.Domain.Conta.Assinatura", b =>
                 {
+                    b.HasOne("SoundVillage.Domain.Transacao.Agreggates.Cartao", "CartaoPagamento")
+                        .WithMany()
+                        .HasForeignKey("CartaoPagamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Plano", "Plano")
                         .WithMany()
                         .HasForeignKey("PlanoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", null)
                         .WithMany("Assinaturas")
                         .HasForeignKey("UsuarioId");
 
+                    b.Navigation("CartaoPagamento");
+
                     b.Navigation("Plano");
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Conta.Playlist", b =>
                 {
+                    b.HasOne("SoundVillage.Domain.Conta.ContaStreaming", "Conta")
+                        .WithMany()
+                        .HasForeignKey("ContaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", "Usuario")
                         .WithMany("Playlists")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Conta");
 
                     b.Navigation("Usuario");
                 });

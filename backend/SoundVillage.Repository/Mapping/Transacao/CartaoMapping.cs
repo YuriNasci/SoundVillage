@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using SoundVillage.Domain.Transacao.Aggregates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SoundVillage.Domain.Core.ValueObjects;
+using SoundVillage.Domain.Transacao.Agreggates;
 
 namespace SoundVillage.Repository.Mapping.Transacao
 {
@@ -15,25 +11,18 @@ namespace SoundVillage.Repository.Mapping.Transacao
         {
             builder.ToTable(nameof(Cartao));
 
-            builder.HasKey(c => c.Id);
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Ativo).IsRequired();
+            builder.Property(x => x.Numero).IsRequired().HasMaxLength(100);
 
-            // Mapeamento do Value Object Monetario para LimiteDisponivel
-            builder.OwnsOne(c => c.LimiteDisponivel, limite =>
+            builder.OwnsOne<Monetario>(d => d.Limite, c =>
             {
-                limite.Property(l => l.Valor).HasColumnName("LimiteDisponivel");
-                // Outras propriedades de Monetario, se houver, podem ser mapeadas aqui
+                c.Property(x => x.Valor).HasColumnName("Limite").IsRequired();
             });
 
-            builder.Property<string>("Numero")
-                .IsRequired();
+            builder.HasMany(x => x.Transacoes).WithOne();
 
-            // Mapeamento da lista de Transacoes
-            // Assumindo que Transacao é uma entidade com seu próprio mapeamento
-            builder.HasMany(c => c.Transacoes)
-                .WithOne() // Aqui você precisa especificar a propriedade de navegação inversa em Transacao, se houver
-                .HasForeignKey("CartaoId"); // Ajuste conforme a sua estrutura de banco de dados
-
-            // O mapeamento de outras propriedades e configurações específicas podem ser adicionadas aqui
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SoundVillage.Domain.Core.Abstracts;
 using SoundVillage.Domain.Core.ValueObjects;
+using SoundVillage.Domain.Transacao.Agreggates;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace SoundVillage.Domain.Transacao.Aggregates
 {
     public class ContaBancaria: BaseEntity
     {
-        public virtual List<Cartao> CartoesDeCredito { get; set; } = new List<Cartao>();
+        //public virtual List<Cartao> CartoesDeCredito { get; set; } = new List<Cartao>();
         private string Nome { get; set; }
         private string NumeroAgencia { get; set; }
         private string NumeroConta { get; set; }
@@ -40,33 +41,33 @@ namespace SoundVillage.Domain.Transacao.Aggregates
 
         public Cartao? SolicitarCartaoCredito()
         {
-            if (AtenderSolicitacaoCartaoCredito())
-            {
-                Random random = new Random();
+            //if (AtenderSolicitacaoCartaoCredito())
+            //{
+            //    Random random = new Random();
 
-                Cartao cartao = new Cartao(
-                    (decimal)random.NextDouble() * 1000000,
-                    GerarNumeroCartaoCredito(),
-                    this
-                );
+            //    Cartao cartao = new Cartao(
+            //        (decimal)random.NextDouble() * 1000000,
+            //        GerarNumeroCartaoCredito(),
+            //        this
+            //    );
 
-                CartoesDeCredito.Add(cartao);
+            //    CartoesDeCredito.Add(cartao);
 
-                return cartao;
-            }
+            //    return cartao;
+            //}
 
             return null;
         }
 
-        private bool AtenderSolicitacaoCartaoCredito()
-        {
-            Random random = new Random();
-            // Gerar um número aleatório entre 1 e Número de cartões + 1
-            int randomNumber = random.Next(1, this.CartoesDeCredito.Count + 2);
+        //private bool AtenderSolicitacaoCartaoCredito()
+        //{
+        //    Random random = new Random();
+        //    // Gerar um número aleatório entre 1 e Número de cartões + 1
+        //    int randomNumber = random.Next(1, this.CartoesDeCredito.Count + 2);
 
-            // Se o número gerado for 1, retorna true, senão retorna false
-            return randomNumber == 1;
-        }
+        //    // Se o número gerado for 1, retorna true, senão retorna false
+        //    return randomNumber == 1;
+        //}
 
         private string GerarNumeroCartaoCredito()
         {

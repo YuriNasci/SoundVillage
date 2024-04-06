@@ -1,4 +1,5 @@
 ﻿using SoundVillage.Domain.Transacao.Aggregates;
+using SoundVillage.Domain.Transacao.Agreggates;
 using System;
 using System.Collections.Generic;
 using System.Linq;

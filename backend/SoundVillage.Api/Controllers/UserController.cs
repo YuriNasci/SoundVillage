@@ -1,35 +1,36 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Application.Conta;
-using SoundVillage.Application.Conta.Request;
+using SoundVillage.Application.Conta.Dto;
 
 namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContaStreamingController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private ContaStreamingService _contaStreamingService;
+        private UsuarioService _usuarioService;
 
-        public ContaStreamingController(ContaStreamingService contaStreamingService)
+        public UserController(UsuarioService usuarioService)
         {
-            _contaStreamingService = contaStreamingService;
+            _usuarioService = usuarioService;
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] ContaStreamingDto dto)
+        public IActionResult Criar(UsuarioDto dto)
         {
-            if (ModelState is { IsValid: false })
+            if (ModelState is { IsValid: false})
                 return BadRequest();
+           
+            var result = this._usuarioService.Criar(dto);
 
-            var result = this._contaStreamingService.Criar(dto);
             return Ok(result);
         }
+
 
         [HttpGet("{id}")]
         public IActionResult Obter(Guid id)
         {
-            var result = this._contaStreamingService.Obter(id);
+            var result = this._usuarioService.Obter(id);
 
             if (result == null)
                 return NotFound();
@@ -37,13 +38,13 @@ namespace SoundVillage.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("login")]
+        [HttpPost("login")] 
         public IActionResult Login([FromBody] Request.LoginRequest login)
         {
             if (ModelState.IsValid == false)
                 return BadRequest();
 
-            var result = this._contaStreamingService.Autenticar(login.Email, login.Senha);
+            var result = this._usuarioService.Autenticar(login.Email, login.Senha);
 
             if (result == null)
             {
@@ -56,5 +57,6 @@ namespace SoundVillage.Api.Controllers
             return Ok(result);
 
         }
+
     }
 }

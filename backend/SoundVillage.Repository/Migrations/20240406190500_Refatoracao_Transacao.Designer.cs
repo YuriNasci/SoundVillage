@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoundVillage.Repository;
 
@@ -11,9 +12,11 @@ using SoundVillage.Repository;
 namespace SoundVillage.Repository.Migrations
 {
     [DbContext(typeof(SoundVillageContext))]
-    partial class SoundVillageContextModelSnapshot : ModelSnapshot
+    [Migration("20240406190500_Refatoracao_Transacao")]
+    partial class Refatoracao_Transacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,39 +43,16 @@ namespace SoundVillage.Repository.Migrations
                     b.ToTable("MusicaPlaylist");
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Conta.Agreggates.Usuario", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Conta.Assinatura", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DtNascimento")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid>("CartaoPagamentoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuario", (string)null);
-                });
-
-            modelBuilder.Entity("SoundVillage.Domain.Conta.Assinatura", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid?>("ContaStreamingId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsAtual")
@@ -81,17 +61,16 @@ namespace SoundVillage.Repository.Migrations
                     b.Property<Guid>("PlanoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("Validade")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlanoId");
+                    b.HasIndex("CartaoPagamentoId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("ContaStreamingId");
+
+                    b.HasIndex("PlanoId");
 
                     b.ToTable("Assinatura", (string)null);
                 });
@@ -131,17 +110,17 @@ namespace SoundVillage.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ContaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("ContaId");
 
                     b.ToTable("Playlist", (string)null);
                 });
@@ -168,17 +147,12 @@ namespace SoundVillage.Repository.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<Guid?>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("Visualizada")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContaBancariaId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Notificacao", (string)null);
                 });
@@ -281,6 +255,34 @@ namespace SoundVillage.Repository.Migrations
                     b.ToTable("Planos", (string)null);
                 });
 
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Cartao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ContaBancariaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ContaStreamingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContaBancariaId");
+
+                    b.HasIndex("ContaStreamingId");
+
+                    b.ToTable("Cartao", (string)null);
+                });
+
             modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", b =>
                 {
                     b.Property<Guid>("Id")
@@ -312,31 +314,7 @@ namespace SoundVillage.Repository.Migrations
                     b.ToTable("ContaBancaria", (string)null);
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Agreggates.Cartao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Numero")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<Guid?>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Cartao", (string)null);
-                });
-
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Agreggates.Transacao", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Transacao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -345,17 +323,27 @@ namespace SoundVillage.Repository.Migrations
                     b.Property<Guid?>("CartaoId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ContaBancariaDestinoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ContaBancariaOrigemId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<DateTime>("DtTransacao")
+                    b.Property<DateTime>("Horario")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartaoId");
+
+                    b.HasIndex("ContaBancariaDestinoId");
+
+                    b.HasIndex("ContaBancariaOrigemId");
 
                     b.ToTable("Transacao", (string)null);
                 });
@@ -377,28 +365,36 @@ namespace SoundVillage.Repository.Migrations
 
             modelBuilder.Entity("SoundVillage.Domain.Conta.Assinatura", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Plano", "Plano")
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.Cartao", "CartaoPagamento")
                         .WithMany()
-                        .HasForeignKey("PlanoId")
+                        .HasForeignKey("CartaoPagamentoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", null)
+                    b.HasOne("SoundVillage.Domain.Conta.ContaStreaming", null)
                         .WithMany("Assinaturas")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("ContaStreamingId");
+
+                    b.HasOne("SoundVillage.Domain.Streaming.Agreggates.Plano", "Plano")
+                        .WithMany()
+                        .HasForeignKey("PlanoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CartaoPagamento");
 
                     b.Navigation("Plano");
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Conta.Playlist", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", "Usuario")
+                    b.HasOne("SoundVillage.Domain.Conta.ContaStreaming", "Conta")
                         .WithMany("Playlists")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("ContaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Conta");
                 });
 
             modelBuilder.Entity("SoundVillage.Domain.Notificacao.Notificacao", b =>
@@ -408,10 +404,6 @@ namespace SoundVillage.Repository.Migrations
                         .HasForeignKey("ContaBancariaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", null)
-                        .WithMany("Notificacoes")
-                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("ContaBancaria");
                 });
@@ -483,6 +475,41 @@ namespace SoundVillage.Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Cartao", b =>
+                {
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancaria")
+                        .WithMany("CartoesDeCredito")
+                        .HasForeignKey("ContaBancariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SoundVillage.Domain.Conta.ContaStreaming", null)
+                        .WithMany("Cartoes")
+                        .HasForeignKey("ContaStreamingId");
+
+                    b.OwnsOne("SoundVillage.Domain.Core.ValueObjects.Monetario", "LimiteDisponivel", b1 =>
+                        {
+                            b1.Property<Guid>("CartaoId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("Valor")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("LimiteDisponivel");
+
+                            b1.HasKey("CartaoId");
+
+                            b1.ToTable("Cartao");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CartaoId");
+                        });
+
+                    b.Navigation("ContaBancaria");
+
+                    b.Navigation("LimiteDisponivel")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", b =>
                 {
                     b.OwnsOne("SoundVillage.Domain.Core.ValueObjects.Monetario", "Saldo", b1 =>
@@ -506,38 +533,23 @@ namespace SoundVillage.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Agreggates.Cartao", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Transacao", b =>
                 {
-                    b.HasOne("SoundVillage.Domain.Conta.Agreggates.Usuario", null)
-                        .WithMany("Cartoes")
-                        .HasForeignKey("UsuarioId");
-
-                    b.OwnsOne("SoundVillage.Domain.Core.ValueObjects.Monetario", "Limite", b1 =>
-                        {
-                            b1.Property<Guid>("CartaoId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<decimal>("Valor")
-                                .HasColumnType("decimal(18,2)")
-                                .HasColumnName("Limite");
-
-                            b1.HasKey("CartaoId");
-
-                            b1.ToTable("Cartao");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CartaoId");
-                        });
-
-                    b.Navigation("Limite")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Agreggates.Transacao", b =>
-                {
-                    b.HasOne("SoundVillage.Domain.Transacao.Agreggates.Cartao", null)
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.Cartao", null)
                         .WithMany("Transacoes")
                         .HasForeignKey("CartaoId");
+
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancariaDestino")
+                        .WithMany()
+                        .HasForeignKey("ContaBancariaDestinoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", "ContaBancariaOrigem")
+                        .WithMany()
+                        .HasForeignKey("ContaBancariaOrigemId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.OwnsOne("SoundVillage.Domain.Core.ValueObjects.Monetario", "Valor", b1 =>
                         {
@@ -546,7 +558,7 @@ namespace SoundVillage.Repository.Migrations
 
                             b1.Property<decimal>("Valor")
                                 .HasColumnType("decimal(18,2)")
-                                .HasColumnName("ValorTransacao");
+                                .HasColumnName("Valor");
 
                             b1.HasKey("TransacaoId");
 
@@ -556,38 +568,19 @@ namespace SoundVillage.Repository.Migrations
                                 .HasForeignKey("TransacaoId");
                         });
 
-                    b.OwnsOne("SoundVillage.Domain.Transacao.ValueObject.Merchant", "Merchant", b1 =>
-                        {
-                            b1.Property<Guid>("TransacaoId")
-                                .HasColumnType("uniqueidentifier");
+                    b.Navigation("ContaBancariaDestino");
 
-                            b1.Property<string>("Nome")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("MerchantNome");
-
-                            b1.HasKey("TransacaoId");
-
-                            b1.ToTable("Transacao");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TransacaoId");
-                        });
-
-                    b.Navigation("Merchant")
-                        .IsRequired();
+                    b.Navigation("ContaBancariaOrigem");
 
                     b.Navigation("Valor")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Conta.Agreggates.Usuario", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Conta.ContaStreaming", b =>
                 {
                     b.Navigation("Assinaturas");
 
                     b.Navigation("Cartoes");
-
-                    b.Navigation("Notificacoes");
 
                     b.Navigation("Playlists");
                 });
@@ -602,14 +595,16 @@ namespace SoundVillage.Repository.Migrations
                     b.Navigation("Albums");
                 });
 
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", b =>
-                {
-                    b.Navigation("Notificacoes");
-                });
-
-            modelBuilder.Entity("SoundVillage.Domain.Transacao.Agreggates.Cartao", b =>
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.Cartao", b =>
                 {
                     b.Navigation("Transacoes");
+                });
+
+            modelBuilder.Entity("SoundVillage.Domain.Transacao.Aggregates.ContaBancaria", b =>
+                {
+                    b.Navigation("CartoesDeCredito");
+
+                    b.Navigation("Notificacoes");
                 });
 #pragma warning restore 612, 618
         }

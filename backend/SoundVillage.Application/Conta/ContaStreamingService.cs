@@ -28,35 +28,36 @@ namespace SoundVillage.Application.Conta
 
         public ContaStreamingDto Criar(ContaStreamingDto dto)
         {
-            if (this.ContaStreamingRepository.Exists(x => x.Email == dto.Email))
-                throw new Exception("Usuario já existente na base");
+            return null;
+            //if (this.ContaStreamingRepository.Exists(x => x.Email == dto.Email))
+            //    throw new Exception("Usuario já existente na base");
 
 
-            Plano plano = this.PlanoRepository.GetById(dto.PlanoId);
+            //Plano plano = this.PlanoRepository.GetById(Guid.Parse(dto.PlanoId));
 
-            if (plano == null)
-                throw new Exception("Plano não existente ou não encontrado");
+            //if (plano == null)
+            //    throw new Exception("Plano não existente ou não encontrado");
 
-            try
-            {
-                Cartao? cartao = this.CartaoRepository.GetByNumero(dto.NumeroCartao);
+            //try
+            //{
+            //    Cartao? cartao = this.CartaoRepository.GetByNumero(dto.NumeroCartao);
 
-                if (cartao == null)
-                    throw new Exception("Cartão não existente ou não encontrado");
+            //    if (cartao == null)
+            //        throw new Exception("Cartão não existente ou não encontrado");
 
-                ContaStreaming conta = new ContaStreaming();
-                conta.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
+            //    ContaStreaming conta = new ContaStreaming();
+            //    conta.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
 
-                this.ContaStreamingRepository.Save(conta);
-                var result = this.Mapper.Map<ContaStreamingDto>(conta);
+            //    this.ContaStreamingRepository.Save(conta);
+            //    var result = this.Mapper.Map<ContaStreamingDto>(conta);
 
-                return result;
-            } catch (SqlException ex) {
-                throw ex;
-            } catch (DbUpdateConcurrencyException ex)
-            {
-                throw ex;
-            }
+            //    return result;
+            //} catch (SqlException ex) {
+            //    throw ex;
+            //} catch (DbUpdateConcurrencyException ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         public ContaStreamingDto Obter(Guid id)

@@ -17,9 +17,9 @@ namespace SoundVillage.Repository.Mapping.Conta
             builder.Property(x => x.Senha).IsRequired().HasMaxLength(100);
             builder.Property(x => x.DataNascimento).IsRequired();
 
-            builder.HasMany(x => x.Cartoes).WithOne();
-            builder.HasMany(x => x.Assinaturas).WithOne();
-            builder.HasMany(x => x.Playlists).WithOne(x => x.Conta);
+            //builder.HasMany(x => x.Cartoes).WithOne();
+            //builder.HasMany(x => x.Assinaturas).WithOne();
+            //builder.HasMany(x => x.Playlists).WithOne(x => x.Conta);
         }
     }
 }

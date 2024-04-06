@@ -11,6 +11,9 @@ import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import { PlanoService } from '../services/plano.service';
 import { Plano } from '../model/plano';
 import { CommonModule } from '@angular/common';
+import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../model/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -26,7 +29,7 @@ export class CadastroComponent {
     nome: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    nascimento: new FormControl('', Validators.required),
+    dataNascimento: new FormControl('', Validators.required),
     plano: new FormControl('', Validators.required),
     nomeCartao: new FormControl(),
     numeroCartao: new FormControl(),
@@ -38,12 +41,37 @@ export class CadastroComponent {
   showCreditCardForm = false;
 
   onSubmit() {
-    if (this.cadastroForm.invalid) {
-      return;
+    if (this.cadastroForm.valid) {
+      const formValue = this.cadastroForm.value;
+      const usuario: Usuario = {
+        id: '',
+        nome: formValue.nome || '',
+        email: formValue.email || '',
+        senha: formValue.senha || '',
+        dataNascimento: formValue.dataNascimento ? new Date(formValue.dataNascimento) : undefined,
+        planoId: formValue.plano || '',
+        nomeCartao: formValue.nomeCartao,
+        numeroCartao: formValue.numeroCartao,
+        validadeCartao: formValue.validadeCartao ? new Date(formValue.validadeCartao) : undefined,
+        codigoSeguranca: formValue.codigoSeguranca
+      };
+
+      this.usuarioService.cadastrar(usuario).subscribe(
+        {
+          next: (response) => {
+            sessionStorage.setItem("user", JSON.stringify(response));
+            this.router.navigate(["/home"]);
+          },
+          error: (e) => {
+            if (e.error) {
+              alert(e.error.error);
+            }
+          }
+        });
     }
   }
 
-  constructor(private planoService: PlanoService) {}
+  constructor(private planoService: PlanoService, private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
     this.planoService.getPlanos().subscribe(planos => {

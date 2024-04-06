@@ -19,4 +19,18 @@ export class UsuarioService {
     });
   }
 
+  public cadastrar(usuario: Usuario) : Observable<Usuario> {
+    return this.http.post<Usuario>(this.url, {
+      id: usuario.id,
+      nome: usuario.nome,
+      email: usuario.email,
+      senha: usuario.senha,
+      dataNascimento: usuario.dataNascimento,
+      planoId: usuario.planoId,
+      nomeCartao: usuario.nomeCartao,
+      numeroCartao: usuario.numeroCartao,
+      validadeCartao: usuario.validadeCartao,
+      codigoSeguranca: usuario.codigoSeguranca
+    });
+  }
 }

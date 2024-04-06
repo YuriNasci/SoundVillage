@@ -1,44 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SoundVillage.Domain.Core.ValueObjects;
+using SoundVillage.Domain.Transacao.ValueObject;
 
 namespace SoundVillage.Repository.Mapping.Transacao
 {
-    public class TransacaoMapping : IEntityTypeConfiguration<Domain.Transacao.Aggregates.Transacao>
+    public class TransacaoMapping : IEntityTypeConfiguration<Domain.Transacao.Agreggates.Transacao>
     {
-        public void Configure(EntityTypeBuilder<Domain.Transacao.Aggregates.Transacao> builder)
+        public void Configure(EntityTypeBuilder<Domain.Transacao.Agreggates.Transacao> builder)
         {
-            builder.ToTable("Transacoes");
+            builder.ToTable(nameof(Domain.Transacao.Agreggates.Transacao));
 
-            builder.HasKey(t => t.Id);
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.DtTransacao).IsRequired();
+            builder.Property(x => x.Descricao).IsRequired().HasMaxLength(50);
 
-            // Mapeamento do Value Object Monetario para Valor
-            builder.OwnsOne(t => t.Valor, valor =>
+            builder.OwnsOne<Merchant>(d => d.Merchant, c =>
             {
-                valor.Property(v => v.Valor).HasColumnName("Valor");
-                // Outras propriedades de Monetario, se houver, podem ser mapeadas aqui
+                c.Property(x => x.Nome).HasColumnName("MerchantNome").IsRequired();
             });
 
-            builder.Property(t => t.Horario)
-                .IsRequired();
+            builder.OwnsOne<Monetario>(d => d.Valor, c =>
+            {
+                c.Property(x => x.Valor).HasColumnName("ValorTransacao").IsRequired();
+            });
 
-            // Mapeamento das propriedades de navegação para ContaBancaria
-            builder.HasOne(t => t.ContaOrigem)
-                .WithMany()
-                .HasForeignKey("ContaOrigemId").OnDelete(DeleteBehavior.NoAction); // Ajuste conforme a sua estrutura de banco de dados
 
-            builder.HasOne(t => t.ContaDestino)
-                .WithMany()
-                .HasForeignKey("ContaDestinoId").OnDelete(DeleteBehavior.NoAction); // Ajuste conforme a sua estrutura de banco de dados
-
-            builder.Property(t => t.Descricao)
-                .HasMaxLength(500); // Ajuste conforme a necessidade
-
-            // Outras configurações específicas do mapeamento podem ser adicionadas aqui
         }
     }
 }

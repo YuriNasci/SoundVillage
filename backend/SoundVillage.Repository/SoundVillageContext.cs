@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SoundVillage.Domain.Conta;
+using SoundVillage.Domain.Conta.Agreggates;
 using SoundVillage.Domain.Notificacao;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Transacao.Aggregates;
+using SoundVillage.Domain.Transacao.Agreggates;
 
 namespace SoundVillage.Repository
 {
@@ -21,7 +23,7 @@ namespace SoundVillage.Repository
         public DbSet<ContaStreaming> ContaStreaming { get; set; }
         public DbSet<Artista> Artistas { get; set; }
         public DbSet<ContaBancaria> ContasBancarias { get; set; }
-
+        public DbSet<Usuario> Usuarios { get; set; }
         public SoundVillageContext(DbContextOptions<SoundVillageContext> options) : base(options)
         {
 
