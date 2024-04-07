@@ -23,6 +23,7 @@ namespace SoundVillage.Application.Dto
             public Guid Id { get; set; }
             public String Nome { get; set; }
             public int Duracao { get; set; }
+            public bool Favorita { get; set; }
         }
     }
 }

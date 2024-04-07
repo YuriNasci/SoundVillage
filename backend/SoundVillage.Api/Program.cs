@@ -28,12 +28,15 @@ builder.Services.AddScoped<PlanoRepository>();
 builder.Services.AddScoped<ArtistaRepository>();
 builder.Services.AddScoped<CartaoRepository>();
 builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<MusicaRepository>();
+builder.Services.AddScoped<PlaylistRepository>();
 
 //Services
 builder.Services.AddScoped<ContaStreamingService>();
 builder.Services.AddScoped<ArtistaService>();
 builder.Services.AddScoped<PlanoService>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<MusicaService>();
 
 var app = builder.Build();
 
