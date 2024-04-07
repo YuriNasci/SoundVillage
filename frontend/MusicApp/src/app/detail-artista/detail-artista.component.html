@@ -1,4 +1,3 @@
-<p>detail-artista works!</p>
 <div *ngIf="artista != undefined">
     <span>Nome: {{artista.nome}}</span>
     <br />
@@ -13,6 +12,20 @@
                Album: {{album.nome}}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <p *ngFor="let music of album.musicas">Musica: {{music.nome}}</p>
+        <!-- <p *ngFor="let music of album.musicas">Musica: {{music.nome}}</p> -->
+        <!-- detail-artista.component.html -->
+
+        <div *ngFor="let musica of album.musicas">
+
+            <mat-icon>music_note</mat-icon>
+        
+            {{musica.nome}}
+        
+            <button mat-icon-button>
+            <mat-icon>star_border</mat-icon>
+            </button>
+        
+        </div>
+  
     </mat-expansion-panel>
 </mat-accordion>

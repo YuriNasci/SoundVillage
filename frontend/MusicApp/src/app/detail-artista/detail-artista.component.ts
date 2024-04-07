@@ -5,12 +5,13 @@ import { ArtistaService } from '../services/artista.service';
 import { Album } from '../model/album';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-detail-artista',
   standalone: true,
-  imports: [MatExpansionModule, CommonModule],
+  imports: [MatExpansionModule, CommonModule, MatIconModule ],
   templateUrl: './detail-artista.component.html',
   styleUrl: './detail-artista.component.css'
 })
