@@ -8,7 +8,7 @@ import { Usuario } from '../model/usuario';
 })
 export class UsuarioService {
 
-  private url = "https://localhost:7015/api/ContaStreaming"
+  private url = "https://localhost:7015/api/User"
 
   constructor(private http: HttpClient) { }
 

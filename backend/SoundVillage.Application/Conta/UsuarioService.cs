@@ -19,13 +19,15 @@ namespace SoundVillage.Application.Conta
         private IMapper Mapper { get; set; }
         private UsuarioRepository UsuarioRepository { get; set; }
         private PlanoRepository PlanoRepository { get; set; }
+        private CartaoRepository CartaoRepository { get; set; }
 
-
-        public UsuarioService(IMapper mapper, UsuarioRepository usuarioRepository, PlanoRepository planoRepository)
+        public UsuarioService(IMapper mapper, UsuarioRepository usuarioRepository, PlanoRepository planoRepository,
+            CartaoRepository cartaoRepository)
         {
             Mapper = mapper;
             UsuarioRepository = usuarioRepository;
             PlanoRepository = planoRepository;
+            CartaoRepository = cartaoRepository;
         }
 
         public UsuarioDto Criar(UsuarioDto dto)
@@ -63,6 +65,40 @@ namespace SoundVillage.Application.Conta
         {
             var usuario = this.UsuarioRepository.Find(x => x.Email == email && x.Senha == senha.HashSHA256()).FirstOrDefault();
             var result = this.Mapper.Map<UsuarioDto>(usuario);
+            return result;
+        }
+
+        public object Criar(UsuarioFormDto dto)
+        {
+            if (this.UsuarioRepository.Exists(x => x.Email == dto.Email))
+                throw new Exception("Usuario já existente na base");
+
+
+            Plano plano = this.PlanoRepository.GetById(Guid.Parse(dto.PlanoId));
+
+            if (plano == null)
+                throw new Exception("Plano não existente ou não encontrado");
+
+            Cartao? cartao = CartaoRepository.GetByNumero(dto.NumeroCartao);
+            if (cartao != null)
+                throw new Exception("Cartão já existente e está em uso.");
+            else
+            {
+                cartao = new Cartao()
+                {
+                    Numero = dto.NumeroCartao,
+                    Ativo = true,
+                    Limite = 1000
+                };
+            }
+
+            Usuario usuario = new Usuario();
+            usuario.CriarConta(dto.Nome, dto.Email, dto.Senha, dto.DataNascimento, plano, cartao);
+
+            //TODO: GRAVAR MA BASE DE DADOS
+            this.UsuarioRepository.Save(usuario);
+            var result = this.Mapper.Map<UsuarioDto>(usuario);
+
             return result;
         }
     }

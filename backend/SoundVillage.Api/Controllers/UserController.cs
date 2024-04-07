@@ -15,13 +15,24 @@ namespace SoundVillage.Api.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpPost]
-        public IActionResult Criar(UsuarioDto dto)
-        {
-            if (ModelState is { IsValid: false})
-                return BadRequest();
+        //[HttpPost]
+        //public IActionResult Criar(UsuarioDto dto)
+        //{
+        //    if (ModelState is { IsValid: false})
+        //        return BadRequest();
            
-            var result = this._usuarioService.Criar(dto);
+        //    var result = this._usuarioService.Criar(dto);
+
+        //    return Ok(result);
+        //}
+
+        [HttpPost]
+        public IActionResult Criar(UsuarioFormDto usuarioForm)
+        {
+            if (ModelState is { IsValid: false })
+                return BadRequest();
+
+            var result = this._usuarioService.Criar(usuarioForm);
 
             return Ok(result);
         }
