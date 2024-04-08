@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SoundVillage.Api.Controllers.Request;
 using SoundVillage.Application.Dto;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Domain.Streaming.Agreggates;
@@ -70,7 +71,6 @@ namespace SoundVillage.Api.Controllers
                 return NotFound();
 
             return Ok(result);
-
         }
 
         [HttpGet("{idBanda}/albums")]
@@ -83,6 +83,17 @@ namespace SoundVillage.Api.Controllers
 
             return Ok(result);
 
+        }
+
+        [HttpGet("{idArtista}/albums/user")]
+        public IActionResult ObterAlbunsParaUsuario([FromBody]ObterAlbumRequest obterAlbumRequest)
+        {
+            var result = this._artistaService.ObterAlbum(obterAlbumRequest.UsuarioId, obterAlbumRequest.ArtistaId);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
     }
 }

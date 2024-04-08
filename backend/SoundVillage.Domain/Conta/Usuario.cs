@@ -1,5 +1,6 @@
 ﻿using SoundVillage.Domain.Core.Extension;
 using SoundVillage.Domain.Core.ValueObjects;
+using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Transacao.Agreggates;
 using SoundVillage.Domain.Transacao.ValueObject;
@@ -85,6 +86,11 @@ namespace SoundVillage.Domain.Conta.Agreggates
         private String CriptografarSenha(string senhaAberta)
         {
             return senhaAberta.HashSHA256();
+        }
+
+        public Playlist GetFavoritas()
+        {
+            return this.Playlists.First(p => p.Nome == NOME_PLAYLIST);
         }
     }
 }

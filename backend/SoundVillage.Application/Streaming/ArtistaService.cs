@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Streaming.Aggregates;
+using SoundVillage.Repository.Migrations;
 using SoundVillage.Repository.Repository;
 using static SoundVillage.Application.Dto.AlbumDto;
 
@@ -9,17 +10,19 @@ namespace SoundVillage.Application.Streaming
     public class ArtistaService
     {
         private ArtistaRepository ArtistaRepository { get; set; }
+        private UsuarioRepository UsuarioRepository { get; set; }
         private IMapper Mapper { get; set; }
 
-        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper)
+        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper, UsuarioRepository usuarioRepository)
         {
             ArtistaRepository = artistaRepository;
             Mapper = mapper;
+            UsuarioRepository = usuarioRepository;
         }
 
         public ArtistaDto Criar(ArtistaDto dto)
         {
-            Artista artista = this.Mapper.Map<Artista>(dto);
+            Domain.Streaming.Aggregates.Artista artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(dto);
             this.ArtistaRepository.Save(artista);
         
             return this.Mapper.Map<ArtistaDto>(artista);
@@ -98,9 +101,9 @@ namespace SoundVillage.Application.Streaming
 
         }
 
-        private Album AlbumDtoParaAlbum(AlbumDto dto)
+        private Domain.Streaming.Aggregates.Album AlbumDtoParaAlbum(AlbumDto dto)
         {
-            Album album = new Album()
+            Domain.Streaming.Aggregates.Album album = new Domain.Streaming.Aggregates.Album()
             {
                 Id = dto.Id,
                 Nome = dto.Nome
@@ -118,7 +121,7 @@ namespace SoundVillage.Application.Streaming
             return album;
         }
 
-        private AlbumDto AlbumParaAlbumDto(Album album)
+        private AlbumDto AlbumParaAlbumDto(Domain.Streaming.Aggregates.Album album)
         {
             AlbumDto dto = new AlbumDto();
             dto.Id = album.Id;
@@ -131,6 +134,50 @@ namespace SoundVillage.Application.Streaming
                     Id = item.Id,
                     Duracao = item.Duracao,
                     Nome = item.Nome
+                };
+
+                dto.Musicas.Add(musicaDto);
+            }
+
+            return dto;
+        }
+
+        public List<AlbumFavoritoDto> ObterAlbum(string usuarioId, string artistaId)
+        {
+            var banda = this.ArtistaRepository.GetById(Guid.Parse(artistaId));
+
+            if (banda == null)
+            {
+                throw new Exception("Banda não encontrada");
+            }
+
+            var result = new List<AlbumFavoritoDto>();
+
+            foreach (var item in banda.Albums)
+            {
+                result.Add(AlbumParaAlbumDto(item, usuarioId));
+            }
+
+            return result;
+        }
+
+        private AlbumFavoritoDto AlbumParaAlbumDto(Domain.Streaming.Aggregates.Album album, string usuarioId)
+        {
+            var dto = new AlbumFavoritoDto();
+            dto.Id = album.Id;
+            dto.Nome = album.Nome;
+
+            var musicasfavoritas = this.UsuarioRepository.GetById(Guid.Parse(usuarioId)).GetFavoritas().Musicas;
+            var musicasFavoritasDoAlbum = album.Musica.Intersect(musicasfavoritas);
+
+            foreach (var item in album.Musica)
+            {
+                var musicaDto = new AlbumFavoritoDto.MusicFavoritaDto()
+                {
+                    Id = item.Id,
+                    Duracao = item.Duracao,
+                    Nome = item.Nome,
+                    Favorita = musicasFavoritasDoAlbum.Any(m => m.Id == item.Id),
                 };
 
                 dto.Musicas.Add(musicaDto);
