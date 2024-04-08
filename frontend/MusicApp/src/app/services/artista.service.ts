@@ -25,4 +25,15 @@ export class ArtistaService {
   public getAlbunsArtista(id: string) : Observable<Album[]> {
     return this.httpClient.get<Album[]>(`${this.url}/${id}/albums`);
   }
+
+  public getAlbunsArtistaPorUsuario(id: string): Observable<Album[]> {
+    const user = sessionStorage.getItem("user");
+    const userId = user? JSON.parse(user).id : null;
+    if (userId !== null) {
+      return this.httpClient.get<Album[]>(`${this.url}/${id}/albums/user/${userId}`);
+    } else {
+      // Handle the case when userId is null
+      return this.httpClient.get<Album[]>(`${this.url}/${id}/albums`);
+    }
+  }
 }

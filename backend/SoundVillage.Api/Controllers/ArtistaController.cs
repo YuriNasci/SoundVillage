@@ -85,10 +85,21 @@ namespace SoundVillage.Api.Controllers
 
         }
 
-        [HttpGet("{idArtista}/albums/user")]
-        public IActionResult ObterAlbunsParaUsuario([FromBody]ObterAlbumRequest obterAlbumRequest)
+        //[HttpGet("{idArtista}/albums/user")]
+        //public IActionResult ObterAlbunsParaUsuario([FromBody]ObterAlbumRequest obterAlbumRequest)
+        //{
+        //    var result = this._artistaService.ObterAlbum(obterAlbumRequest.UsuarioId, obterAlbumRequest.ArtistaId);
+
+        //    if (result == null)
+        //        return NotFound();
+
+        //    return Ok(result);
+        //}
+
+        [HttpGet("{idArtista}/albums/user/{idUsuario}")]
+        public IActionResult ObterAlbunsParaUsuario(string idArtista, string idUsuario)
         {
-            var result = this._artistaService.ObterAlbum(obterAlbumRequest.UsuarioId, obterAlbumRequest.ArtistaId);
+            var result = this._artistaService.ObterAlbum(idUsuario, idArtista);
 
             if (result == null)
                 return NotFound();

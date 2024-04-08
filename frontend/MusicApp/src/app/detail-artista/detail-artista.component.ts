@@ -31,10 +31,9 @@ export class DetailArtistaComponent implements OnInit {
       this.artista = response;
     });
 
-    this.artistaService.getAlbunsArtista(this.idArtista).subscribe(response => {
+    this.artistaService.getAlbunsArtistaPorUsuario(this.idArtista).subscribe(response => {
       this.albuns = response;
       console.log(this.albuns);
     });
-
   }
 }
