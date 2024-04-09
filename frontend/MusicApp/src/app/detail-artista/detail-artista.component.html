@@ -5,28 +5,22 @@
     <img [src]="artista.backdrop">
 </div>
 
-<mat-accordion >
-    <mat-expansion-panel hideToggle *ngFor="let album of albuns" >
+<mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let album of albuns">
         <mat-expansion-panel-header>
             <mat-panel-title>
-               Album: {{album.nome}}
+                Album: {{album.nome}}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <!-- <p *ngFor="let music of album.musicas">Musica: {{music.nome}}</p> -->
-        <!-- detail-artista.component.html -->
 
         <div *ngFor="let musica of album.musicas">
-
             <mat-icon>music_note</mat-icon>
-        
             {{musica.nome}}
-        
-            <button mat-icon-button>
-            {{musica.favorita}}
-            <mat-icon>star_border</mat-icon>
+
+            <button mat-icon-button (click)="favoritar(musica)">
+                {{musica.favorita ? 'Favoritada' : 'Não favoritada'}}
+                <mat-icon>{{musica.favorita ? 'star' : 'star_border'}}</mat-icon>
             </button>
-        
         </div>
-  
     </mat-expansion-panel>
 </mat-accordion>

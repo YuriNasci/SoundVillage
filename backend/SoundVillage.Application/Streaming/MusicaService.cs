@@ -33,7 +33,11 @@ namespace SoundVillage.Application.Streaming
                 Playlist playlistFavoritasAtualizada = playlistFavoritas;
                 var musica = MusicaRepository.GetById(IdMusica);
 
-                playlistFavoritasAtualizada.Musicas.Add(musica);
+                if (!playlistFavoritasAtualizada.Musicas.Contains(musica))
+                    playlistFavoritasAtualizada.Musicas.Add(musica);
+                else
+                    playlistFavoritasAtualizada.Musicas.Remove(musica);
+
                 this.PlaylistRepository.Update(playlistFavoritasAtualizada);
             }
         }
