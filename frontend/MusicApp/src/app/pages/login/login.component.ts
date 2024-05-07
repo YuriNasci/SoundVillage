@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Usuario } from 'src/app/model/usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +15,13 @@ export class LoginComponent implements OnInit {
     Validators.email,
   ]);
   public passwordFormControl = new FormControl(null, [Validators.minLength(4)]);
-
   public userForm!: FormGroup;
-  constructor() {}
+  public usuario!: Usuario;
+  errorMessage = '';
+  
+  constructor(private usuarioService: UsuarioService, private router: Router) {
+
+  }
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -25,5 +32,22 @@ export class LoginComponent implements OnInit {
 
   submit() {
     console.log(this.userForm.value);
+
+    let emailValue = this.userForm.value.username as String;
+    let senhaValue = this.userForm.value.password as String;
+
+    this.usuarioService.autenticar(emailValue, senhaValue).subscribe(
+      {
+        next: (response) => {
+          this.usuario = response;
+          sessionStorage.setItem("user", JSON.stringify(this.usuario));
+          this.router.navigate(["/home"]);
+        },
+        error: (e) => {
+          if (e.error) {
+            this.errorMessage = e.error.error;
+          }
+        }
+      });
   }
 }
