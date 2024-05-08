@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.userForm.value);
-
     let emailValue = this.userForm.value.username as String;
     let senhaValue = this.userForm.value.password as String;
 
@@ -41,7 +39,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.usuario = response;
           sessionStorage.setItem("user", JSON.stringify(this.usuario));
-          this.router.navigate(["/home"]);
+          this.router.navigate([""]);
         },
         error: (e) => {
           if (e.error) {
