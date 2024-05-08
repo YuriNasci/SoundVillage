@@ -1,12 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Usuario } from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
+  public isUserLoggedIn(): Observable<boolean> {
+    if (sessionStorage.getItem("user")) {
+      this.loggedIn.next(true);
+    }
+
+    return this.loggedIn.asObservable();
+  }
 
   private url = "http://localhost:5251/api/User"
 
@@ -32,5 +41,11 @@ export class UsuarioService {
       validadeCartao: usuario.validadeCartao,
       codigoSeguranca: usuario.codigoSeguranca
     });
+  }
+
+  logout(): void {
+    // Remova o token do localStorage
+    localStorage.removeItem('user');
+    this.loggedIn.next(false);
   }
 }
