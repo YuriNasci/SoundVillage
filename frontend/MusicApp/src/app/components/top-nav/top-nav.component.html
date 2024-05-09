@@ -16,7 +16,7 @@
       </ul>
     </div>
     <ul class="spotify__top-nav_auth">
-      <li *ngIf="!isUserLoggedIn">Sign up</li>
+      <li *ngIf="!isUserLoggedIn" (click)="onNavigateToSignUp()">Sign up</li>
       <li
         class="spotify__top-nav_auth_login"
         *ngIf="!isUserLoggedIn"

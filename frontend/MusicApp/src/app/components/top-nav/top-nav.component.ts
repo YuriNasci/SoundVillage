@@ -41,4 +41,8 @@ export class TopNavComponent implements OnInit {
   logout() {
     this.usuarioService.logout();
   }
+
+  public onNavigateToSignUp() {
+    this.router.navigate(['/','signup']);
+  }
 }

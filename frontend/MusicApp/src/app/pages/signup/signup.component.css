@@ -1,0 +1,17 @@
+.top-nav {
+    background-color: black;
+    display: flex;
+    padding: 32px;
+    overflow: hidden;
+    height: 32px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    box-sizing: content-box;
+}
+
+.logo {
+    fill: var(--decorative-base, #fff);
+    stroke: transparent;
+}
