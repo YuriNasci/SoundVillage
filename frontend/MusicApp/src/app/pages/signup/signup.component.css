@@ -54,7 +54,7 @@
 }
 
 .encore-dark-theme .encore-bright-accent-set {
-    --background-base: #1ed760;
+    background-color: #1ed760;
     --background-highlight: #1fdf64;
     --background-press: #169c46;
     --background-elevated-base: #1fdf64;
@@ -89,7 +89,7 @@
 }
 
 .encore-dark-theme .encore-negative-set {
-    --background-base: #e91429;
+    background-color: #e91429;
     --background-highlight: #de1327;
     --background-press: #920d1a;
     --background-elevated-base: #de1327;
@@ -873,33 +873,29 @@ body {
     inline-size: 100%;
 }
 
-.encore-dark-theme .encore-bright-accent-set {
-    background-color: #1ed760;
-    --background-highlight: #1fdf64;
-    --background-press: #169c46;
-    --background-elevated-base: #1fdf64;
-    --background-elevated-highlight: #1fdf64;
-    --background-elevated-press: #169c46;
-    --background-tinted-base: #1ed760;
-    --background-tinted-highlight: #1ed760;
-    --background-tinted-press: #1ed760;
-    --background-unsafe-for-small-text-base: #1ed760;
-    --background-unsafe-for-small-text-highlight: #1ed760;
-    --background-unsafe-for-small-text-press: #1ed760;
-    --text-base: #000;
-    --text-subdued: #000;
-    --text-bright-accent: #000;
-    --text-negative: #000;
-    --text-warning: #000;
-    --text-positive: #000;
-    --text-announcement: #000;
-    --essential-base: #000;
-    --essential-subdued: #000;
-    --essential-bright-accent: #000;
-    --essential-negative: #000;
-    --essential-warning: #000;
-    --essential-positive: #000;
-    --essential-announcement: #000;
-    --decorative-base: #000;
-    --decorative-subdued: #1abc54;
+.dIiEaI {
+    overflow-wrap: anywhere;
+}
+.dIiEaI {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    background-color: var(--background-base,#1ed760);
+    color: var(--text-base,#000000);
+    display: flex;
+    border-radius: 9999px;
+    font-size: inherit;
+    min-block-size: var(--encore-control-size-base, 48px);
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-block-start: var(--encore-spacing-tighter-2, 8px);
+    padding-block-end: var(--encore-spacing-tighter-2, 8px);
+    padding-inline-start: var(--encore-spacing-looser-2, 32px);
+    padding-inline-end: var(--encore-spacing-looser-2, 32px);
+}
+
+.cGURid {
+    border-color: transparent;
 }
