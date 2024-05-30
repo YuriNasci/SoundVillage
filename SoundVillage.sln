@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Repository", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Api", "SoundVillage.Api\SoundVillage.Api.csproj", "{26A0C884-E2C1-425A-B83A-8808E0DB3594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundVillage.Application", "SoundVillage.Application\SoundVillage.Application.csproj", "{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Application", "SoundVillage.Application\SoundVillage.Application.csproj", "{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundVillage.Admin", "SoundVillage.Admin\SoundVillage.Admin.csproj", "{54E0993E-2491-4FD5-9291-859BC162643F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E0993E-2491-4FD5-9291-859BC162643F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E0993E-2491-4FD5-9291-859BC162643F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E0993E-2491-4FD5-9291-859BC162643F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E0993E-2491-4FD5-9291-859BC162643F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
