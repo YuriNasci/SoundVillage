@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using SoundVillage.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<SoundVillageAdminContext>(c =>
+{
+    c.UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnectionAdmin"));
+});
 
 var app = builder.Build();
 
