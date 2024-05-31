@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Admin.Dto;
+using SoundVillage.Domain.Admin.Aggregates;
 using SoundVillage.Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -26,5 +27,12 @@ namespace SoundVillage.Application.Admin
 
             return this.mapper.Map<IEnumerable<UsuarioAdminDto>>(result);
         }
+
+        public void Salvar(UsuarioAdminDto dto)
+        {
+            var usuario = this.mapper.Map<UsuarioAdmin>(dto);
+            usuario.CriptografaSenha();
+            this.Repository.Save(usuario);
+        } 
     }
 }
