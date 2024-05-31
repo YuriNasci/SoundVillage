@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using SoundVillage.Application.Admin;
+using SoundVillage.Application.Admin.Profile;
+using SoundVillage.Application.Conta.Profile;
 using SoundVillage.Repository;
+using SoundVillage.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,11 @@ builder.Services.AddDbContext<SoundVillageAdminContext>(c =>
     c.UseLazyLoadingProxies()
     .UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnectionAdmin"));
 });
+
+builder.Services.AddAutoMapper(typeof(UsuarioAdminProfile).Assembly);
+
+builder.Services.AddScoped<UsuarioAdminRepository>();
+builder.Services.AddScoped<UsuarioAdminService>();
 
 var app = builder.Build();
 

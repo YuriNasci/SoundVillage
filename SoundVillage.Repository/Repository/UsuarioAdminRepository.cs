@@ -9,7 +9,7 @@ namespace SoundVillage.Repository.Repository
 {
     public class UsuarioAdminRepository : RepositoryBase<UsuarioAdmin>
     {
-        public UsuarioAdminRepository(SoundVillageContext context) : base(context)
+        public UsuarioAdminRepository(SoundVillageAdminContext context) : base(context)
         {
         }
     }
