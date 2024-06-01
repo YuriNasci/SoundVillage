@@ -1,0 +1,6 @@
+@SoundVillage.STS_HostAddress = http://localhost:5003
+
+GET {{SoundVillage.STS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
