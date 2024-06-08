@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace SoundVillage.STS.Data
 {
-    public class IdentityRepository
+    public class IdentityRepository : IIdentityRepository
     {
         private readonly string connectionString;
 
@@ -18,7 +18,7 @@ namespace SoundVillage.STS.Data
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var user = await connection.QueryFirstAsync<Usuario>(IdentityQuery.FindById(), new
+                var user = await connection.QueryFirstOrDefaultAsync<Usuario>(IdentityQuery.FindById(), new
                 {
                     id = id
                 });
@@ -29,8 +29,9 @@ namespace SoundVillage.STS.Data
 
         public async Task<Usuario> FindByEmailAndPasswordAsync(string email, string password)
         {
-            using (var connection = new SqlConnection(this.connectionString)) {
-                var user = await connection.QueryFirstAsync(IdentityQuery.FindByEmailAndPassword(), new
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                var user = await connection.QueryFirstOrDefaultAsync<Usuario>(IdentityQuery.FindByEmailAndPassword(), new
                 {
                     email = email,
                     senha = password
