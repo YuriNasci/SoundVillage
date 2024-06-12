@@ -23,10 +23,10 @@ namespace SoundVillage.STS.ProfileService
 
             var claims = new List<Claim>()
             {
-                new Claim("iss", "SpotifyLike.STS"),
+                new Claim("iss", "SoundVillage.STS"),
                 new Claim("name", user.Nome),
                 new Claim("email", user.Email),
-                new Claim("role", "´spotifylike-user")
+                new Claim("role", "soundvillage-user")
             };
 
             context.IssuedClaims = claims;

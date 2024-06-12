@@ -1,5 +1,6 @@
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using SoundVillage.Application.Conta;
 using SoundVillage.Application.Conta.Profile;
 using SoundVillage.Application.Streaming;
@@ -26,7 +27,7 @@ builder.Services.AddAutoMapper(typeof(ContaStreamingProfile).Assembly);
 builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
     .AddIdentityServerAuthentication(options =>
     {
-        options.Authority = "https://localhost:7081";
+        options.Authority = "https://localhost:7285";
         options.ApiName = "soundvillage-api";
         options.ApiSecret = "SoundVillageSecret";
         options.RequireHttpsMetadata = true;
@@ -39,6 +40,8 @@ builder.Services.AddAuthorization(options =>
         p.RequireClaim("role", "soundvillage-user");
     });
 });
+
+IdentityModelEventSource.ShowPII = true;
 
 //Repositories
 builder.Services.AddScoped<ContaStreamingRepository>();

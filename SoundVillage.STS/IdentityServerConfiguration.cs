@@ -17,7 +17,7 @@ namespace SoundVillage.STS
         public static IEnumerable<ApiResource> GetApiResource() {
             return new List<ApiResource>()
             {
-                new ApiResource("SoundVillage-api", "SoundVillage", new string[] {"soundvillage-user"})
+                new ApiResource("soundvillage-api", "SoundVillage", new string[] {"soundvillage-user"})
                 {
                     ApiSecrets =
                     {
