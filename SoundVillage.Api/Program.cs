@@ -22,7 +22,7 @@ builder.Services.AddDbContext<SoundVillageContext>(c =>
     .UseSqlServer(builder.Configuration.GetConnectionString("SoundVillageConnection"));
 });
 
-builder.Services.AddAutoMapper(typeof(ContaStreamingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(UsuarioProfile).Assembly);
 
 builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
     .AddIdentityServerAuthentication(options =>
