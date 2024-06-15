@@ -12,5 +12,10 @@ namespace SoundVillage.Repository.Repository
         public UsuarioAdminRepository(SoundVillageAdminContext context) : base(context)
         {
         }
+
+        public UsuarioAdmin GetUsuarioAdminByEmailAndPassword(string email, string password)
+        {
+            return this.Find(x => x.Email == email && x.Password == password).FirstOrDefault();
+        }
     }
 }

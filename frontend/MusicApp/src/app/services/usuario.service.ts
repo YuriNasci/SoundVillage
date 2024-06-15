@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../model/usuario';
@@ -12,11 +12,20 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  public autenticar(email:String, senha: String) : Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.url}/login`, {
-      email:email,
-      senha:senha
-    });
+  public autenticar(email:string, senha: string) : Observable<any> {
+    let body = new URLSearchParams();
+    body.set("username", email);
+    body.set("password", senha);
+    body.set("client_id", "client-angular-spotify");
+    body.set("client_secret", "SpotifyLikeSecret");
+    body.set("grant_type", "password");
+    body.set("scope", "SpotifyLikeScope");
+
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded")
+    }
+
+    return this.http.post(`${this.url}`, body.toString(), options);
   }
 
   public cadastrar(usuario: Usuario) : Observable<Usuario> {
