@@ -2,6 +2,7 @@
 using SoundVillage.Application.Conta.Dto;
 using SoundVillage.Domain.Admin.Aggregates;
 using SoundVillage.Domain.Conta.Agreggates;
+using SoundVillage.Domain.Streaming.Aggregates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace SoundVillage.Application.Admin.Profile
             CreateMap<UsuarioAdminDto, UsuarioAdmin>()
                 .ForMember(x => x.Perfil, m => m.MapFrom(f => (Perfil)f.Perfil))
                 .ReverseMap();
+
+            CreateMap<ArtistaItemDto, Artista>()
+                .ReverseMap();
+
+            CreateMap<ArtistaFormDto, Artista>().ReverseMap();
         }
     }
 }

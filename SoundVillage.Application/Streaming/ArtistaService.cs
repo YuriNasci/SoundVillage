@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
-using SoundVillage.Application.Streaming.Dto;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Repository.Migrations;
 using SoundVillage.Repository.Repository;
@@ -193,6 +192,12 @@ namespace SoundVillage.Application.Streaming
             var result = ArtistaRepository.GetAll();
 
             return Mapper.Map<IEnumerable<ArtistaItemDto>>(result);
+        }
+
+        public void Salvar(ArtistaFormDto artistaFormDto)
+        {
+            var artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(artistaFormDto);
+            this.ArtistaRepository.Save(artista);
         }
     }
 }

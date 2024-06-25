@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Streaming;
 
 namespace SoundVillage.Admin.Controllers
@@ -26,8 +28,8 @@ namespace SoundVillage.Admin.Controllers
             return View();
         }
 
-        // GET: ArtistaController/Create
-        public ActionResult Create()
+        // GET: ArtistaController/Criar
+        public ActionResult Criar()
         {
             return View();
         }
@@ -35,16 +37,16 @@ namespace SoundVillage.Admin.Controllers
         // POST: ArtistaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Salvar(ArtistaFormDto artistaFormDto)
         {
-            try
+            if (ModelState.IsValid == false)
             {
-                return RedirectToAction(nameof(Index));
+                return View("Criar");
             }
-            catch
-            {
-                return View();
-            }
+
+            this.artistaService.Salvar(artistaFormDto);
+
+            return RedirectToAction("Index");
         }
 
         // GET: ArtistaController/Edit/5
