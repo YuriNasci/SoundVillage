@@ -4,6 +4,7 @@ using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Repository.Migrations;
 using SoundVillage.Repository.Repository;
+using System.Diagnostics.Eventing.Reader;
 using static SoundVillage.Application.Dto.AlbumDto;
 
 namespace SoundVillage.Application.Streaming
@@ -194,10 +195,14 @@ namespace SoundVillage.Application.Streaming
             return Mapper.Map<IEnumerable<ArtistaItemDto>>(result);
         }
 
-        public void Salvar(ArtistaFormDto artistaFormDto)
+        public void Salvar(ArtistaDto artistaFormDto)
         {
             var artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(artistaFormDto);
-            this.ArtistaRepository.Save(artista);
+            if (artistaFormDto.Id == Guid.Empty) {
+                this.ArtistaRepository.Save(artista);
+            } else {
+                this.ArtistaRepository.Update(artista);
+            }
         }
     }
 }

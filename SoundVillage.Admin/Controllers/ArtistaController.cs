@@ -1,7 +1,9 @@
 ﻿using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SoundVillage.Application.Admin.Dto;
+using SoundVillage.Application.Dto;
 using SoundVillage.Application.Streaming;
 
 namespace SoundVillage.Admin.Controllers
@@ -37,7 +39,7 @@ namespace SoundVillage.Admin.Controllers
         // POST: ArtistaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Salvar(ArtistaFormDto artistaFormDto)
+        public ActionResult Salvar(ArtistaDto artistaFormDto)
         {
             if (ModelState.IsValid == false)
             {
@@ -49,25 +51,37 @@ namespace SoundVillage.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: ArtistaController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artista = artistaService.Obter(id.Value);
+            if (artista == null)
+            {
+                return NotFound();
+            }
+            return View(artista);
         }
 
         // POST: ArtistaController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Editar(Guid id, ArtistaDto artista)
         {
-            try
+            if (id != artista.Id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                artistaService.Salvar(artista);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(artista);
         }
 
         // GET: ArtistaController/Delete/5

@@ -1,5 +1,6 @@
 ﻿using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Conta.Dto;
+using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Admin.Aggregates;
 using SoundVillage.Domain.Conta.Agreggates;
 using SoundVillage.Domain.Streaming.Aggregates;
@@ -22,6 +23,8 @@ namespace SoundVillage.Application.Admin.Profile
                 .ReverseMap();
 
             CreateMap<ArtistaFormDto, Artista>().ReverseMap();
+
+            CreateMap<ArtistaDto, Artista>().ReverseMap();
         }
     }
 }
