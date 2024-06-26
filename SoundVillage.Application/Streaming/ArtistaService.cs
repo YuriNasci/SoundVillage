@@ -204,5 +204,11 @@ namespace SoundVillage.Application.Streaming
                 this.ArtistaRepository.Update(artista);
             }
         }
+
+        public void Excluir(Guid id)
+        {
+            var artista = this.ArtistaRepository.GetById(id);
+            this.ArtistaRepository.Delete(artista);
+        }
     }
 }

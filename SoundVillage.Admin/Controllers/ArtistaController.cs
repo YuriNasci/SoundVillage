@@ -66,9 +66,8 @@ namespace SoundVillage.Admin.Controllers
             return View(artista);
         }
 
-        // POST: ArtistaController/Edit/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Editar(Guid id, ArtistaDto artista)
         {
             if (id != artista.Id)
@@ -84,25 +83,28 @@ namespace SoundVillage.Admin.Controllers
             return View(artista);
         }
 
-        // GET: ArtistaController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Excluir(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artista = artistaService.Obter(id.Value);
+            if (artista == null)
+            {
+                return NotFound();
+            }
+
+            return View(artista);
         }
 
-        // POST: ArtistaController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult ConfirmarExclusao(Guid id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            artistaService.Excluir(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
