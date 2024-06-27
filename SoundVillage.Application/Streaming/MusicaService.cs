@@ -1,4 +1,7 @@
-﻿using SoundVillage.Domain.Conta;
+﻿using AutoMapper;
+using SoundVillage.Application.Admin.Dto;
+using SoundVillage.Application.Dto;
+using SoundVillage.Domain.Conta;
 using SoundVillage.Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,13 +16,15 @@ namespace SoundVillage.Application.Streaming
         private MusicaRepository MusicaRepository { get; set; }
         private PlaylistRepository PlaylistRepository { get; set; }
         private UsuarioRepository UsuarioRepository { get; set; }
+        private IMapper Mapper { get; set; }
 
         public MusicaService(MusicaRepository musicaRepository, PlaylistRepository playlistRepository, UsuarioRepository usuarioRepository
-            )
+, IMapper mapper)
         {
             this.MusicaRepository = musicaRepository;
             this.PlaylistRepository = playlistRepository;
             this.UsuarioRepository = usuarioRepository;
+            Mapper = mapper;
         }
 
         public void FavoritarMusica(Guid IdMusica, Guid IdUsuario)
@@ -40,6 +45,12 @@ namespace SoundVillage.Application.Streaming
 
                 this.PlaylistRepository.Update(playlistFavoritasAtualizada);
             }
+        }
+
+        public IEnumerable<MusicaDto> ObterTodas()
+        {
+            var musicas = this.MusicaRepository.GetAll();
+            return this.Mapper.Map<IEnumerable<MusicaDto>>(musicas);
         }
     }
 }

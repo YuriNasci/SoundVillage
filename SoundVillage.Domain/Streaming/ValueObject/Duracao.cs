@@ -23,7 +23,7 @@ namespace SoundVillage.Domain.Streaming.ValueObject
             int minutos = Valor / 60;
             int segundos = Valor % 60;
 
-            return $"{minutos.ToString().PadLeft(1, '0')}:{segundos.ToString().PadLeft(1, '0')}";
+            return $"{minutos.ToString().PadLeft(2, '0')}:{segundos.ToString().PadLeft(2, '0')}";
         }
 
         public static implicit operator int(Duracao d) => d.Valor;

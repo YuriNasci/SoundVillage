@@ -30,10 +30,12 @@ builder.Services.AddAutoMapper(typeof(ArtistaProfile).Assembly);
 builder.Services.AddScoped<ArtistaRepository>();
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<UsuarioAdminRepository>();
-
+builder.Services.AddScoped<MusicaRepository>();
+builder.Services.AddScoped<PlaylistRepository>();
 
 builder.Services.AddScoped<UsuarioAdminService>();
 builder.Services.AddScoped<ArtistaService>();
+builder.Services.AddScoped<MusicaService>();
 
 builder.Services.AddAuthentication(options =>
 {

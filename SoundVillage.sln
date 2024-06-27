@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Admin", "SoundVillage.Admin\SoundVillage.Admin.csproj", "{54E0993E-2491-4FD5-9291-859BC162643F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundVillage.STS", "SoundVillage.STS\SoundVillage.STS.csproj", "{BEBE9DB1-A882-491B-BFB2-1B0ED6FA4797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.STS", "SoundVillage.STS\SoundVillage.STS.csproj", "{BEBE9DB1-A882-491B-BFB2-1B0ED6FA4797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

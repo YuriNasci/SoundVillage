@@ -25,6 +25,10 @@ namespace SoundVillage.Application.Admin.Profile
             CreateMap<ArtistaFormDto, Artista>().ReverseMap();
 
             CreateMap<ArtistaDto, Artista>().ReverseMap();
+
+            CreateMap<Musica, MusicaDto>()
+                .ForMember(x => x.Duracao, m => m.MapFrom(f => f.Duracao.Formatado()))
+                .ReverseMap();
         }
     }
 }
