@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Streaming;
 
 namespace SoundVillage.Admin.Controllers
@@ -7,9 +8,13 @@ namespace SoundVillage.Admin.Controllers
     public class MusicaController : Controller
     {
         private MusicaService musicaService { get; set; }
-        public MusicaController(MusicaService musicaService)
+        private ArtistaService artistaService { get; set; }
+        private AlbumService albumService { get; set; }
+        public MusicaController(MusicaService musicaService, ArtistaService artistaService, AlbumService albumService)
         {
             this.musicaService = musicaService;
+            this.artistaService = artistaService;
+            this.albumService = albumService;
         }
         // GET: MusicaController1
         public ActionResult Index()
@@ -47,19 +52,34 @@ namespace SoundVillage.Admin.Controllers
         }
 
         // GET: MusicaController1/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(Guid id)
         {
-            return View();
+            var musica = musicaService.Obter(id);
+            if (musica == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Artistas = artistaService.ObterTodos();
+            ViewBag.Albuns = albumService.ObterTodos();
+            return View(musica);
         }
 
-        // POST: MusicaController1/Edit/5
+        // POST: MusicaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Editar(MusicaDto musica)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    musicaService.Atualizar(musica);
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewBag.Artistas = artistaService.ObterTodos();
+                ViewBag.Albuns = albumService.ObterTodos();
+                return View(musica);
             }
             catch
             {

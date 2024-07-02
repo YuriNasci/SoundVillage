@@ -11,8 +11,9 @@ namespace SoundVillage.Application.Admin.Dto
     {
         public Guid Id { get; set; }
         public String Nome { get; set; }
-        public string NomeArtista { get; set; }
-        public string NomeAlbum { get; set; }
+        public Guid? ArtistaId { get; set; }
+        public string? NomeArtista { get; set; }
+        public string? NomeAlbum { get; set; }
         public Guid? AlbumId { get; set; }
         public string Duracao { get; set; }
     }

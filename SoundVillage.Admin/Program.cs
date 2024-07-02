@@ -32,10 +32,12 @@ builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<UsuarioAdminRepository>();
 builder.Services.AddScoped<MusicaRepository>();
 builder.Services.AddScoped<PlaylistRepository>();
+builder.Services.AddScoped<AlbumRepository>();
 
 builder.Services.AddScoped<UsuarioAdminService>();
 builder.Services.AddScoped<ArtistaService>();
 builder.Services.AddScoped<MusicaService>();
+builder.Services.AddScoped<AlbumService>();
 
 builder.Services.AddAuthentication(options =>
 {

@@ -2,6 +2,8 @@
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Conta;
+using SoundVillage.Domain.Streaming.Aggregates;
+using SoundVillage.Domain.Streaming.ValueObject;
 using SoundVillage.Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -51,6 +53,25 @@ namespace SoundVillage.Application.Streaming
         {
             var musicas = this.MusicaRepository.GetAll();
             return this.Mapper.Map<IEnumerable<MusicaDto>>(musicas);
+        }
+
+        public MusicaDto Obter(Guid id)
+        {
+            var musica = this.MusicaRepository.GetById(id);
+            return this.Mapper.Map<MusicaDto>(musica);
+        }
+
+        public void Atualizar(MusicaDto musicaDto)
+        {
+            var musica = this.MusicaRepository.GetById(musicaDto.Id);
+
+            musica.AlbumId = musicaDto.AlbumId;
+            musica.Nome = musicaDto.Nome;
+            musica.ArtistaId = musicaDto.ArtistaId;
+
+            //TO DO: DURAÇÃO
+
+            this.MusicaRepository.Update(musica);
         }
     }
 }
