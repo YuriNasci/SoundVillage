@@ -26,6 +26,7 @@ namespace SoundVillage.Repository.Mapping.Streaming
                 c.Property(x => x.Valor).IsRequired().HasMaxLength(50);
             });
 
+            builder.HasOne(x => x.Artista).WithMany().OnDelete(DeleteBehavior.NoAction);
 
         }
     }

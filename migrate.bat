@@ -5,4 +5,4 @@ if "%migrationName%"=="" (
     exit /b
 )
 dotnet ef migrations add %migrationName% -c SoundVillageContext -p ./SoundVillage.Repository/SoundVillage.Repository.csproj -s ./SoundVillage.Api/SoundVillage.Api.csproj
-dotnet ef database update -p ./SoundVillage.Repository/SoundVillage.Repository.csproj -s ./SoundVillage.Api/SoundVillage.Api.csproj
+dotnet ef database update -p ./SoundVillage.Repository/SoundVillage.Repository.csproj -s ./SoundVillage.Api/SoundVillage.Api.csproj --context SoundVillageContext
