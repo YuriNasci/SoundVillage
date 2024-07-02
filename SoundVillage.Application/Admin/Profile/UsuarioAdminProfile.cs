@@ -28,6 +28,7 @@ namespace SoundVillage.Application.Admin.Profile
 
             CreateMap<Musica, MusicaDto>()
                 .ForMember(x => x.Duracao, m => m.MapFrom(f => f.Duracao.Formatado()))
+                .ForMember(x => x.NomeAlbum, m => m.MapFrom(f => f.Album != null? f.Album.Nome: "Single"))
                 .ReverseMap();
         }
     }

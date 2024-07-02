@@ -129,7 +129,7 @@ namespace SoundVillage.Application.Streaming
             dto.Id = album.Id;
             dto.Nome = album.Nome;
 
-            foreach (var item in album.Musica)
+            foreach (var item in album.Musicas)
             {
                 var musicaDto = new MusicDto()
                 {
@@ -170,9 +170,9 @@ namespace SoundVillage.Application.Streaming
             dto.Nome = album.Nome;
 
             var musicasfavoritas = this.UsuarioRepository.GetById(Guid.Parse(usuarioId)).GetFavoritas().Musicas;
-            var musicasFavoritasDoAlbum = album.Musica.Intersect(musicasfavoritas);
+            var musicasFavoritasDoAlbum = album.Musicas.Intersect(musicasfavoritas);
 
-            foreach (var item in album.Musica)
+            foreach (var item in album.Musicas)
             {
                 var musicaDto = new AlbumFavoritoDto.MusicFavoritaDto()
                 {

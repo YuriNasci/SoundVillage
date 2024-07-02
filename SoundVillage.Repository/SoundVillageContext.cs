@@ -35,6 +35,11 @@ namespace SoundVillage.Repository
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SoundVillageContext).Assembly);
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Musica>()
+                .HasOne(m => m.Album)
+                .WithMany(a => a.Musicas)
+                .HasForeignKey(m => m.AlbumId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

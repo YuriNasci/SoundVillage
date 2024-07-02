@@ -8,7 +8,8 @@ namespace SoundVillage.Domain.Streaming.Aggregates
         public Guid Id { get; set; }
         public String Nome { get; set; }
         public Duracao Duracao { get; set; }
-
+        public Guid AlbumId { get; set; }
+        public virtual Album? Album { get; set; }
         public virtual IList<Playlist> Playlists { get; set; } = new List<Playlist>();
 
     }
