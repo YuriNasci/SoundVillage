@@ -73,5 +73,10 @@ namespace SoundVillage.Application.Streaming
 
             this.MusicaRepository.Update(musica);
         }
+
+        public void Salvar(Musica musica)
+        {
+            this.MusicaRepository.Save(musica);
+        }
     }
 }
