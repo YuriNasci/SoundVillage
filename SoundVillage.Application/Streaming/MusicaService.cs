@@ -68,8 +68,7 @@ namespace SoundVillage.Application.Streaming
             musica.AlbumId = musicaDto.AlbumId;
             musica.Nome = musicaDto.Nome;
             musica.ArtistaId = musicaDto.ArtistaId.Value;
-
-            //TO DO: DURAÇÃO
+            musica.Duracao = new Duracao(musicaDto.Duracao);
 
             this.MusicaRepository.Update(musica);
         }

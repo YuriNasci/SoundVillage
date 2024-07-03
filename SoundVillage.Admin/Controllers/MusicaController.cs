@@ -4,6 +4,7 @@ using SoundVillage.Admin.ViewsModels.Musica;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Domain.Streaming.Aggregates;
+using SoundVillage.Domain.Streaming.ValueObject;
 
 namespace SoundVillage.Admin.Controllers
 {
@@ -50,7 +51,7 @@ namespace SoundVillage.Admin.Controllers
                 var musica = new Musica()
                 {
                     Nome = musicaViewModel.Nome,
-                    Duracao = new Domain.Streaming.ValueObject.Duracao(120),
+                    Duracao = new Duracao(musicaViewModel.Duracao),
                     ArtistaId = musicaViewModel.ArtistaId,
                     AlbumId = musicaViewModel.AlbumId,
                 };

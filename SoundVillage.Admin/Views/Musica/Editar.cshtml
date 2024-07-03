@@ -21,7 +21,7 @@
 
             <div class="form-group mb-3">
                 <label asp-for="Duracao" class="control-label">Duração</label>
-                <input asp-for="Duracao" class="form-control" />
+                <input asp-for="Duracao" class="form-control" id="Duracao" />
                 <span asp-validation-for="Duracao" class="text-danger"></span>
             </div>
 
@@ -51,9 +51,14 @@
 <div class="mt-3">
     <a asp-action="Index" class="btn btn-secondary">Voltar à lista</a>
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Duracao").inputmask("99:99");
+        });
+    </script>
 }
