@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SoundVillage.Admin.ViewsModels.Musica
 {
-    public class CriarViewModel
+    public class CadastroMusicaViewModel
     {
         [Required]
         public String Nome { get; set; }

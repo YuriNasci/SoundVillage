@@ -46,7 +46,7 @@ namespace SoundVillage.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Criar(CriarViewModel musicaViewModel)
+        public ActionResult Criar(CadastroMusicaViewModel musicaViewModel)
         {
                 if (ModelState.IsValid)
                 {

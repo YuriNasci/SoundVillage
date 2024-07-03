@@ -11,7 +11,7 @@ namespace SoundVillage.Admin.Mappings
         public MappingProfile()
         {
             // Mapear CriarViewModel para Musica
-            CreateMap<CriarViewModel, Musica>()
+            CreateMap<CadastroMusicaViewModel, Musica>()
                 .ForMember(dest => dest.Duracao, opt => opt.MapFrom(src => new Duracao(src.Duracao)));
         }
     }
