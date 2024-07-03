@@ -1,4 +1,5 @@
 ﻿using SoundVillage.Domain.Conta;
+using SoundVillage.Domain.Streaming.Agreggates;
 using SoundVillage.Domain.Streaming.ValueObject;
 
 namespace SoundVillage.Domain.Streaming.Aggregates
@@ -13,6 +14,6 @@ namespace SoundVillage.Domain.Streaming.Aggregates
         public Guid? AlbumId { get; set; }
         public virtual Album? Album { get; set; }
         public virtual IList<Playlist> Playlists { get; set; } = new List<Playlist>();
-
+        public virtual IList<MusicaFavorita> Favoritadas { get; set; } = new List<MusicaFavorita>();
     }
 }

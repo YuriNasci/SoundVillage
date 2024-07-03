@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SoundVillage.Admin.ViewModels.Musica;
 using SoundVillage.Admin.ViewsModels.Musica;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Streaming;
@@ -113,6 +114,13 @@ namespace SoundVillage.Admin.Controllers
         {
             musicaService.Excluir(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult MaisCurtidas()
+        {
+            var musicas = musicaService.ObterMaisCurtidas();
+            var musicaViewModels = mapper.Map<IEnumerable<MusicaMaisCurtidasViewModel>>(musicas);
+            return View(musicaViewModels);
         }
     }
 }

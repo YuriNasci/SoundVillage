@@ -82,5 +82,13 @@ namespace SoundVillage.Application.Streaming
         {
             this.MusicaRepository.Delete(MusicaRepository.GetById(id));
         }
+
+        public IEnumerable<Musica> ObterMaisCurtidas(int top = 10)
+        {
+            return MusicaRepository.GetAll()
+                .OrderByDescending(m => m.Favoritadas.Count)
+                .Take(top)
+                .ToList();
+        }
     }
 }

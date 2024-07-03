@@ -22,7 +22,6 @@ namespace SoundVillage.Domain.Conta.Agreggates
         public virtual IList<Playlist> Playlists { get; set; } = new List<Playlist>();
         public virtual IList<Notificacao.Notificacao> Notificacoes { get; set; } = new List<Notificacao.Notificacao>();
 
-
         public void CriarConta(string nome, string email, string senha, DateTime dtNascimento, Plano plano, Cartao cartao)
         {
             this.Nome = nome;
