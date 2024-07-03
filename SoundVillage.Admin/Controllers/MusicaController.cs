@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Admin.ViewsModels.Musica;
 using SoundVillage.Application.Admin.Dto;
@@ -13,11 +14,13 @@ namespace SoundVillage.Admin.Controllers
         private MusicaService musicaService { get; set; }
         private ArtistaService artistaService { get; set; }
         private AlbumService albumService { get; set; }
-        public MusicaController(MusicaService musicaService, ArtistaService artistaService, AlbumService albumService)
+        private readonly IMapper mapper;
+        public MusicaController(MusicaService musicaService, ArtistaService artistaService, AlbumService albumService, IMapper mapper)
         {
             this.musicaService = musicaService;
             this.artistaService = artistaService;
             this.albumService = albumService;
+            this.mapper = mapper;
         }
         // GET: MusicaController1
         public ActionResult Index()
@@ -41,28 +44,20 @@ namespace SoundVillage.Admin.Controllers
             return View();
         }
 
-        // POST: MusicaController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Criar(CriarViewModel musicaViewModel)
         {
-            try
-            {
-                var musica = new Musica()
+                if (ModelState.IsValid)
                 {
-                    Nome = musicaViewModel.Nome,
-                    Duracao = new Duracao(musicaViewModel.Duracao),
-                    ArtistaId = musicaViewModel.ArtistaId,
-                    AlbumId = musicaViewModel.AlbumId,
-                };
+                    var musica = mapper.Map<Musica>(musicaViewModel);
+                    musicaService.Salvar(musica);
+                    return RedirectToAction(nameof(Index));
+                }
 
-                musicaService.Salvar(musica);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                ViewBag.Artistas = artistaService.ObterTodos();
+                ViewBag.Albuns = albumService.ObterTodos();
+                return View(musicaViewModel);
         }
 
         // GET: MusicaController1/Edit/5
@@ -101,25 +96,23 @@ namespace SoundVillage.Admin.Controllers
             }
         }
 
-        // GET: MusicaController1/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Excluir(Guid id)
         {
-            return View();
+            var musica = musicaService.Obter(id);
+            if (musica == null)
+            {
+                return NotFound();
+            }
+
+            return View(musica);
         }
 
-        // POST: MusicaController1/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult ConfirmarExclusao(Guid id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            musicaService.Excluir(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -77,5 +77,10 @@ namespace SoundVillage.Application.Streaming
         {
             this.MusicaRepository.Save(musica);
         }
+
+        public void Excluir(Guid id)
+        {
+            this.MusicaRepository.Delete(MusicaRepository.GetById(id));
+        }
     }
 }

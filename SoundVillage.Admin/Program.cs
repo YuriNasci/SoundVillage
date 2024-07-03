@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using SoundVillage.Admin.Mappings;
 using SoundVillage.Application.Admin;
 using SoundVillage.Application.Admin.Profile;
 using SoundVillage.Application.Conta.Profile;
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<SoundVillageContext>(c =>
 
 builder.Services.AddAutoMapper(typeof(UsuarioAdminProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(ArtistaProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 builder.Services.AddScoped<ArtistaRepository>();
 builder.Services.AddScoped<UsuarioRepository>();
