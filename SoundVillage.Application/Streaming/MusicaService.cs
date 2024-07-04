@@ -4,6 +4,7 @@ using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Conta;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.ValueObject;
+using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace SoundVillage.Application.Streaming
 {
     public class MusicaService
     {
-        private MusicaRepository MusicaRepository { get; set; }
-        private PlaylistRepository PlaylistRepository { get; set; }
-        private UsuarioRepository UsuarioRepository { get; set; }
+        private IMusicaRepository MusicaRepository { get; set; }
+        private IPlaylistRepository PlaylistRepository { get; set; }
+        private IUsuarioRepository UsuarioRepository { get; set; }
         private IMapper Mapper { get; set; }
 
-        public MusicaService(MusicaRepository musicaRepository, PlaylistRepository playlistRepository, UsuarioRepository usuarioRepository
+        public MusicaService(IMusicaRepository musicaRepository, IPlaylistRepository playlistRepository, IUsuarioRepository usuarioRepository
 , IMapper mapper)
         {
             this.MusicaRepository = musicaRepository;
