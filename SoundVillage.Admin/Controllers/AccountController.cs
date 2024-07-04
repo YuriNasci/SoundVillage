@@ -10,9 +10,9 @@ namespace SoundVillage.Admin.Controllers
 {
     public class AccountController : Controller
     {
-        private UsuarioAdminService usuarioAdminService;
+        private IUsuarioAdminService usuarioAdminService;
 
-        public AccountController(UsuarioAdminService usuarioAdminService)
+        public AccountController(IUsuarioAdminService usuarioAdminService)
         {
             this.usuarioAdminService = usuarioAdminService;
         }

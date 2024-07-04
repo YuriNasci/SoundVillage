@@ -4,15 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
+using SoundVillage.Application.Interface;
 using SoundVillage.Application.Streaming;
 
 namespace SoundVillage.Admin.Controllers
 {
     public class ArtistaController : Controller
     {
-        private ArtistaService artistaService;
+        private IArtistaService artistaService;
 
-        public ArtistaController(ArtistaService artistaService)
+        public ArtistaController(IArtistaService artistaService)
         {
             this.artistaService = artistaService;
         }

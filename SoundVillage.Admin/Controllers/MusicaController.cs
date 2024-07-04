@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Admin.ViewModels.Musica;
 using SoundVillage.Admin.ViewsModels.Musica;
 using SoundVillage.Application.Admin.Dto;
+using SoundVillage.Application.Interface;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.ValueObject;
@@ -12,11 +13,11 @@ namespace SoundVillage.Admin.Controllers
 {
     public class MusicaController : Controller
     {
-        private MusicaService musicaService { get; set; }
-        private ArtistaService artistaService { get; set; }
-        private AlbumService albumService { get; set; }
+        private IMusicaService musicaService { get; set; }
+        private IArtistaService artistaService { get; set; }
+        private IAlbumService albumService { get; set; }
         private readonly IMapper mapper;
-        public MusicaController(MusicaService musicaService, ArtistaService artistaService, AlbumService albumService, IMapper mapper)
+        public MusicaController(IMusicaService musicaService, IArtistaService artistaService, IAlbumService albumService, IMapper mapper)
         {
             this.musicaService = musicaService;
             this.artistaService = artistaService;
@@ -42,7 +43,7 @@ namespace SoundVillage.Admin.Controllers
             ViewBag.Artistas = artistaService.ObterTodos();
             ViewBag.Albuns = albumService.ObterTodos();
 
-            return View();
+            return View(new CadastroMusicaViewModel());
         }
 
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
+using SoundVillage.Application.Interface;
 using SoundVillage.Domain.Conta;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Domain.Streaming.ValueObject;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SoundVillage.Application.Streaming
 {
-    public class MusicaService
+    public class MusicaService : IMusicaService
     {
         private IMusicaRepository MusicaRepository { get; set; }
         private IPlaylistRepository PlaylistRepository { get; set; }

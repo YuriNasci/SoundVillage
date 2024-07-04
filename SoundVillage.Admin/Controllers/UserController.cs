@@ -8,9 +8,9 @@ namespace SoundVillage.Admin.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        private UsuarioAdminService usuarioAdminService;
+        private IUsuarioAdminService usuarioAdminService;
 
-        public UserController(UsuarioAdminService usuarioAdminService)
+        public UserController(IUsuarioAdminService usuarioAdminService)
         {
             this.usuarioAdminService = usuarioAdminService;
         }

@@ -219,12 +219,43 @@ for (i = 0, l = charts.length; i < l; i++) {
 
 var assemblies = [
   {
+    "name": "SoundVillage.Admin",
+    "classes": [
+      { "name": "AspNetCoreGeneratedDocument.Views__ViewStart", "rp": "SoundVillage.Admin_Views__ViewStart.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Artista_Editar", "rp": "SoundVillage.Admin_Views_Artista_Editar.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 49, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Artista_Excluir", "rp": "SoundVillage.Admin_Views_Artista_Excluir.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 27, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Artista_Index", "rp": "SoundVillage.Admin_Views_Artista_Index.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 30, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Home_Index", "rp": "SoundVillage.Admin_Views_Home_Index.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 8, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Home_Privacy", "rp": "SoundVillage.Admin_Views_Home_Privacy.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Musica_Criar", "rp": "SoundVillage.Admin_Views_Musica_Criar.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 62, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Musica_Editar", "rp": "SoundVillage.Admin_Views_Musica_Editar.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 64, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Musica_Excluir", "rp": "SoundVillage.Admin_Views_Musica_Excluir.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 27, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Musica_Index", "rp": "SoundVillage.Admin_Views_Musica_Index.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 34, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Musica_MaisCurtidas", "rp": "SoundVillage.Admin_Views_Musica_MaisCurtidas.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 33, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Shared__Layout", "rp": "SoundVillage.Admin_Views_Shared__Layout.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 69, "cb": 0, "tb": 28, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Shared_Error", "rp": "SoundVillage.Admin_Views_Shared_Error.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 25, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_User_Index", "rp": "SoundVillage.Admin_Views_User_Index.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 29, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "SoundVillage.Admin_Program.html", "cl": 0, "ucl": 44, "cal": 44, "tl": 71, "cb": 0, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Attributes.DurationAttribute", "rp": "SoundVillage.Admin_DurationAttribute.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 22, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Controllers.AccountController", "rp": "SoundVillage.Admin_AccountController.html", "cl": 12, "ucl": 15, "cal": 27, "tl": 57, "cb": 2, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Controllers.ArtistaController", "rp": "SoundVillage.Admin_ArtistaController.html", "cl": 44, "ucl": 11, "cal": 55, "tl": 111, "cb": 11, "tb": 14, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Controllers.HomeController", "rp": "SoundVillage.Admin_HomeController.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 34, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Controllers.MusicaController", "rp": "SoundVillage.Admin_MusicaController.html", "cl": 37, "ucl": 33, "cal": 70, "tl": 127, "cb": 10, "tb": 24, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Controllers.UserController", "rp": "SoundVillage.Admin_UserController.html", "cl": 13, "ucl": 5, "cal": 18, "tl": 45, "cb": 1, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Mappings.MappingProfile", "rp": "SoundVillage.Admin_MappingProfile.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Models.ErrorViewModel", "rp": "SoundVillage.Admin_ErrorViewModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Models.LoginRequest", "rp": "SoundVillage.Admin_LoginRequest.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 14, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.ViewModels.Musica.MusicaMaisCurtidasViewModel", "rp": "SoundVillage.Admin_MusicaMaisCurtidasViewModel.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.Views.Musica.IndexModel", "rp": "SoundVillage.Admin_IndexModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Admin.ViewsModels.Musica.CadastroMusicaViewModel", "rp": "SoundVillage.Admin_CadastroMusicaViewModel.html", "cl": 1, "ucl": 3, "cal": 4, "tl": 18, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+    ]},
+  {
     "name": "SoundVillage.Application",
     "classes": [
       { "name": "SoundVillage.Application.Admin.Dto.ArtistaFormDto", "rp": "SoundVillage.Application_ArtistaFormDto.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SoundVillage.Application.Admin.Dto.ArtistaItemDto", "rp": "SoundVillage.Application_ArtistaItemDto.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 15, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Application.Admin.Dto.ArtistaItemDto", "rp": "SoundVillage.Application_ArtistaItemDto.html", "cl": 2, "ucl": 1, "cal": 3, "tl": 15, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Admin.Dto.MusicaDto", "rp": "SoundVillage.Application_MusicaDto.html", "cl": 5, "ucl": 2, "cal": 7, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SoundVillage.Application.Admin.Dto.UsuarioAdminDto", "rp": "SoundVillage.Application_UsuarioAdminDto.html", "cl": 3, "ucl": 2, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Application.Admin.Dto.UsuarioAdminDto", "rp": "SoundVillage.Application_UsuarioAdminDto.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Admin.Profile.UsuarioAdminProfile", "rp": "SoundVillage.Application_UsuarioAdminProfile.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Admin.UsuarioAdminService", "rp": "SoundVillage.Application_UsuarioAdminService.html", "cl": 21, "ucl": 0, "cal": 21, "tl": 47, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Conta.ContaStreamingService", "rp": "SoundVillage.Application_ContaStreamingService.html", "cl": 0, "ucl": 25, "cal": 25, "tl": 77, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
@@ -240,9 +271,9 @@ var assemblies = [
       { "name": "SoundVillage.Application.Dto.AlbumFavoritoDto", "rp": "SoundVillage.Application_AlbumFavoritoDto.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Dto.ArtistaDto", "rp": "SoundVillage.Application_ArtistaDto.html", "cl": 2, "ucl": 2, "cal": 4, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Profile.ArtistaProfile", "rp": "SoundVillage.Application_ArtistaProfile.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 18, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SoundVillage.Application.Streaming.AlbumService", "rp": "SoundVillage.Application_AlbumService.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SoundVillage.Application.Streaming.ArtistaService", "rp": "SoundVillage.Application_ArtistaService.html", "cl": 31, "ucl": 104, "cal": 135, "tl": 216, "cb": 1, "tb": 22, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "SoundVillage.Application.Streaming.MusicaService", "rp": "SoundVillage.Application_MusicaService.html", "cl": 53, "ucl": 1, "cal": 54, "tl": 95, "cb": 3, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Application.Streaming.AlbumService", "rp": "SoundVillage.Application_AlbumService.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Application.Streaming.ArtistaService", "rp": "SoundVillage.Application_ArtistaService.html", "cl": 45, "ucl": 142, "cal": 187, "tl": 220, "cb": 2, "tb": 44, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "SoundVillage.Application.Streaming.MusicaService", "rp": "SoundVillage.Application_MusicaService.html", "cl": 67, "ucl": 2, "cal": 69, "tl": 96, "cb": 6, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "SoundVillage.Application.Streaming.PlanoService", "rp": "SoundVillage.Application_PlanoService.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
   {
@@ -343,10 +374,34 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
+    "assembly": "SoundVillage.Admin", "class": "AspNetCoreGeneratedDocument.Views_Shared__Layout", "reportPath": "SoundVillage.Admin_Views_Shared__Layout.html", "methodName": "<ExecuteAsync()", "methodShortName": "<ExecuteAsync()", "fileIndex": 0, "line": 20,
+    "metrics": [
+      { "value": 812, "exceeded": true },
+      { "value": 28, "exceeded": true },
+    ]},
+  {
+    "assembly": "SoundVillage.Admin", "class": "AspNetCoreGeneratedDocument.Views_Artista_Index", "reportPath": "SoundVillage.Admin_Views_Artista_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 15,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "SoundVillage.Admin", "class": "AspNetCoreGeneratedDocument.Views_Musica_Index", "reportPath": "SoundVillage.Admin_Views_Musica_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 17,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
     "assembly": "SoundVillage.Domain", "class": "SoundVillage.Domain.Transacao.Agreggates.Cartao", "reportPath": "SoundVillage.Domain_Cartao.html", "methodName": "ValidarTransacao(SoundVillage.Domain.Transacao.Agreggates.Transacao)", "methodShortName": "ValidarTransacao(...)", "fileIndex": 0, "line": 45,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "SoundVillage.Admin", "class": "SoundVillage.Admin.Controllers.MusicaController", "reportPath": "SoundVillage.Admin_MusicaController.html", "methodName": "Editar(SoundVillage.Application.Admin.Dto.MusicaDto)", "methodShortName": "Editar(...)", "fileIndex": 0, "line": 82,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
     ]},
   {
     "assembly": "SoundVillage.Application", "class": "SoundVillage.Application.Conta.Profile.UsuarioProfile", "reportPath": "SoundVillage.Application_UsuarioProfile.html", "methodName": ".ctor()", "methodShortName": ".ctor()", "fileIndex": 0, "line": 15,

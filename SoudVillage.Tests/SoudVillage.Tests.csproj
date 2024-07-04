@@ -25,8 +25,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SoundVillage.Admin\SoundVillage.Admin.csproj" />
     <ProjectReference Include="..\SoundVillage.Application\SoundVillage.Application.csproj" />
     <ProjectReference Include="..\SoundVillage.Domain\SoundVillage.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Admin\Views\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Domain\ValueObjects\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>

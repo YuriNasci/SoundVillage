@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
+using SoundVillage.Application.Interface;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Migrations;
@@ -11,7 +12,7 @@ using Album = SoundVillage.Domain.Streaming.Aggregates.Album;
 
 namespace SoundVillage.Application.Streaming
 {
-    public class ArtistaService
+    public class ArtistaService : IArtistaService
     {
         private IArtistaRepository ArtistaRepository { get; set; }
         private IUsuarioRepository UsuarioRepository { get; set; }
@@ -28,7 +29,7 @@ namespace SoundVillage.Application.Streaming
         {
             Domain.Streaming.Aggregates.Artista artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(dto);
             this.ArtistaRepository.Save(artista);
-        
+
             return this.Mapper.Map<ArtistaDto>(artista);
         }
 
@@ -200,9 +201,12 @@ namespace SoundVillage.Application.Streaming
         public void Salvar(ArtistaDto artistaFormDto)
         {
             var artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(artistaFormDto);
-            if (artistaFormDto.Id == Guid.Empty) {
+            if (artistaFormDto.Id == Guid.Empty)
+            {
                 this.ArtistaRepository.Save(artista);
-            } else {
+            }
+            else
+            {
                 this.ArtistaRepository.Update(artista);
             }
         }
