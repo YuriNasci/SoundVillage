@@ -2,20 +2,22 @@
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
 using SoundVillage.Domain.Streaming.Aggregates;
+using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Migrations;
 using SoundVillage.Repository.Repository;
 using System.Diagnostics.Eventing.Reader;
 using static SoundVillage.Application.Dto.AlbumDto;
+using Album = SoundVillage.Domain.Streaming.Aggregates.Album;
 
 namespace SoundVillage.Application.Streaming
 {
     public class ArtistaService
     {
-        private ArtistaRepository ArtistaRepository { get; set; }
-        private UsuarioRepository UsuarioRepository { get; set; }
+        private IArtistaRepository ArtistaRepository { get; set; }
+        private IUsuarioRepository UsuarioRepository { get; set; }
         private IMapper Mapper { get; set; }
 
-        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper, UsuarioRepository usuarioRepository)
+        public ArtistaService(IArtistaRepository artistaRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
         {
             ArtistaRepository = artistaRepository;
             Mapper = mapper;
@@ -51,13 +53,13 @@ namespace SoundVillage.Application.Streaming
                 throw new Exception("Artista não encontrada");
             }
 
-            var novoAlbum = this.AlbumDtoParaAlbum(dto);
+            var novoAlbum = this.Mapper.Map<Album>(dto);
 
             Artista.AdicionarAlbum(novoAlbum);
 
             this.ArtistaRepository.Update(Artista);
 
-            var result = this.AlbumParaAlbumDto(novoAlbum);
+            var result = this.Mapper.Map<AlbumDto>(novoAlbum);
 
             return result;
 
@@ -76,7 +78,7 @@ namespace SoundVillage.Application.Streaming
 
             if (album == null) return null;
 
-            var result = AlbumParaAlbumDto(album);
+            var result = this.Mapper.Map<AlbumDto>(album);
             result.ArtistaId = Artista.Id;
 
             return result;

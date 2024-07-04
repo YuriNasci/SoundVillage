@@ -1,7 +1,9 @@
-﻿namespace SoundVillage.Repository.Interfaces
+﻿using SoundVillage.Domain.Conta.Agreggates;
+
+namespace SoundVillage.Repository.Interfaces
 {
     public interface IUsuarioRepository
     {
-        SoundVillageContext Context { get; set; }
+        Usuario GetById(Guid id);
     }
 }

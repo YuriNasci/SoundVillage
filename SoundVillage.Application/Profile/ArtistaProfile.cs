@@ -10,6 +10,9 @@ namespace SoundVillage.Application.Profile
         {
             CreateMap<ArtistaDto, Artista>()
                 .ReverseMap();
+
+            CreateMap<AlbumDto, Album>()
+                .ReverseMap();
         }
     }
 }

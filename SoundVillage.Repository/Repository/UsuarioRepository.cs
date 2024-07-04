@@ -18,17 +18,5 @@ namespace SoundVillage.Repository.Repository
         {
             Context = context;
         }
-
-        //public Usuario GetById(Guid id)
-        //{
-        //    return this.Context.Usuarios
-        //               .Include(x => x.Assinaturas) //Caso não esteja usando lazy loading
-        //               .Include(x => x.Playlists)
-        //               .Include(x => x.Notificacoes)
-        //               //.AsSplitQuery() //Quebra a consulta por cada tipo
-        //               .FirstOrDefault(x => x.Id == id);
-        //}
-
-
     }
 }
