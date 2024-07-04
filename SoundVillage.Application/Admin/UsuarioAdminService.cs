@@ -2,6 +2,7 @@
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Domain.Admin.Aggregates;
 using SoundVillage.Domain.Core.Extension;
+using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace SoundVillage.Application.Admin
 {
-    public class UsuarioAdminService
+    public class UsuarioAdminService : IUsuarioAdminService
     {
-        private UsuarioAdminRepository Repository { get; set; }
+        private IUsuarioAdminRepository Repository { get; set; }
         private IMapper mapper { get; set; }
-        public UsuarioAdminService(UsuarioAdminRepository repository, IMapper mapper)
+        public UsuarioAdminService(IUsuarioAdminRepository repository, IMapper mapper)
         {
             Repository = repository;
             this.mapper = mapper;
