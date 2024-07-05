@@ -1,4 +1,5 @@
 ﻿using SoundVillage.Domain.Admin.Aggregates;
+using SoundVillage.Domain.Conta.Agreggates;
 using SoundVillage.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,6 @@ namespace SoundVillage.Repository.Repository
         public virtual UsuarioAdmin GetUsuarioAdminByEmailAndPassword(string email, string password)
         {
             return this.Find(x => x.Email == email && x.Password == password).FirstOrDefault();
-        }
-
-        object IUsuarioAdminRepository.GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

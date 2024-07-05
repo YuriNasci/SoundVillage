@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using SoundVillage.Admin.Mappings;
 using SoundVillage.Application.Admin;
 using SoundVillage.Application.Admin.Profile;
-using SoundVillage.Application.Conta.Profile;
+using SoundVillage.Application.Interface;
 using SoundVillage.Application.Profile;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Repository;
+using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,17 +30,17 @@ builder.Services.AddAutoMapper(typeof(UsuarioAdminProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(ArtistaProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
-builder.Services.AddScoped<ArtistaRepository>();
-builder.Services.AddScoped<UsuarioRepository>();
-builder.Services.AddScoped<UsuarioAdminRepository>();
-builder.Services.AddScoped<MusicaRepository>();
-builder.Services.AddScoped<PlaylistRepository>();
+builder.Services.AddScoped<IArtistaRepository, ArtistaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioAdminRepository, UsuarioAdminRepository>();
+builder.Services.AddScoped<IMusicaRepository, MusicaRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 builder.Services.AddScoped<AlbumRepository>();
 
-builder.Services.AddScoped<UsuarioAdminService>();
-builder.Services.AddScoped<ArtistaService>();
-builder.Services.AddScoped<MusicaService>();
-builder.Services.AddScoped<AlbumService>();
+builder.Services.AddScoped<IUsuarioAdminService, UsuarioAdminService>();
+builder.Services.AddScoped<IArtistaService, ArtistaService>();
+builder.Services.AddScoped<IMusicaService, MusicaService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 
 builder.Services.AddAuthentication(options =>
 {
