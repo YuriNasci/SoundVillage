@@ -8,5 +8,8 @@ namespace SoundVillage.Repository.Interfaces
         IEnumerable<UsuarioAdmin> GetAll();
         UsuarioAdmin GetUsuarioAdminByEmailAndPassword(string email, string password);
         void Save(UsuarioAdmin usuario);
+        UsuarioAdmin GetById(Guid id);
+        void Update(UsuarioAdmin usuario);
+        void Delete(UsuarioAdmin usuario);
     }
 }

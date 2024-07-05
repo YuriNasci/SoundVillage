@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Domain.Admin.Aggregates;
+using SoundVillage.Domain.Conta.Agreggates;
 using SoundVillage.Domain.Core.Extension;
 using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Repository;
@@ -42,6 +43,21 @@ namespace SoundVillage.Application.Admin
             var passwordCipher = password.HashSHA256();
             var user = this.Repository.GetUsuarioAdminByEmailAndPassword(email, passwordCipher);
             return user;
+        }
+
+        public UsuarioAdmin Obter(Guid id)
+        {
+            return this.Repository.GetById(id);
+        }
+
+        public void Atualizar(UsuarioAdmin usuario)
+        {
+            this.Repository.Update(usuario);
+        }
+
+        public void Excluir(Guid id)
+        {
+            this.Repository.Delete(Obter(id));
         }
     }
 }
