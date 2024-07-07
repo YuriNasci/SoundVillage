@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Admin.ViewModels.Musica;
@@ -11,6 +12,7 @@ using SoundVillage.Domain.Streaming.ValueObject;
 
 namespace SoundVillage.Admin.Controllers
 {
+    [Authorize]
     public class MusicaController : Controller
     {
         private IMusicaService musicaService { get; set; }

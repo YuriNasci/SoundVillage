@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using SoundVillage.Application.Streaming;
 
 namespace SoundVillage.Admin.Controllers
 {
+    [Authorize]
     public class ArtistaController : Controller
     {
         private IArtistaService artistaService;

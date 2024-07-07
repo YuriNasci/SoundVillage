@@ -5,7 +5,7 @@
 
 # User-specific files
 *.rsuser
-*.suo
+*.suo3
 *.user
 *.userosscache
 *.sln.docstates
@@ -365,5 +365,5 @@ FodyWeavers.xsd
 *.bkp
 *.lock
 changes.diff
-.ctxt
 .diff
+help.txt.txt
