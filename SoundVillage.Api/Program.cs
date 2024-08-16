@@ -7,6 +7,7 @@ using SoundVillage.Application.Conta.Profile;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Repository;
 using SoundVillage.Repository.Repository;
+using SoundVillage.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,11 +73,11 @@ IdentityModelEventSource.ShowPII = true;
 //Repositories
 builder.Services.AddScoped<ContaStreamingRepository>();
 builder.Services.AddScoped<PlanoRepository>();
-builder.Services.AddScoped<ArtistaRepository>();
+builder.Services.AddScoped<IArtistaRepository, ArtistaRepository>();
 builder.Services.AddScoped<CartaoRepository>();
-builder.Services.AddScoped<UsuarioRepository>();
-builder.Services.AddScoped<MusicaRepository>();
-builder.Services.AddScoped<PlaylistRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IMusicaRepository, MusicaRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
 //Services
 builder.Services.AddScoped<ContaStreamingService>();

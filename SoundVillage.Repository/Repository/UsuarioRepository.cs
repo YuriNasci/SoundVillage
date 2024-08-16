@@ -18,5 +18,12 @@ namespace SoundVillage.Repository.Repository
         {
             Context = context;
         }
+
+        public List<Usuario> Find(Func<Usuario, bool> value)
+        {
+            return null;
+        }
+
+        public bool Exists(Func<Usuario, bool> value) { return false; }
     }
 }

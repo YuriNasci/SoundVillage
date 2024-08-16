@@ -11,17 +11,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SoundVillage.Domain.Streaming.Agreggates;
+using SoundVillage.Repository.Interfaces;
 
 namespace SoundVillage.Application.Conta
 {
     public class UsuarioService
     {
         private IMapper Mapper { get; set; }
-        private UsuarioRepository UsuarioRepository { get; set; }
+        private IUsuarioRepository UsuarioRepository { get; set; }
         private PlanoRepository PlanoRepository { get; set; }
         private CartaoRepository CartaoRepository { get; set; }
 
-        public UsuarioService(IMapper mapper, UsuarioRepository usuarioRepository, PlanoRepository planoRepository,
+        public UsuarioService(IMapper mapper, IUsuarioRepository usuarioRepository, PlanoRepository planoRepository,
             CartaoRepository cartaoRepository)
         {
             Mapper = mapper;
