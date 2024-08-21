@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SoundVillage.Admin.Controllers;
 using SoundVillage.Application.Admin;
@@ -12,11 +13,13 @@ namespace SoundVillage.Tests.Admin.Controllers
     {
         private readonly UserController controller;
         private readonly Mock<IUsuarioAdminService> mockUsuarioAdminService;
+        private readonly Mock<IMapper> mockMapper;
 
         public UserControllerTests()
         {
             mockUsuarioAdminService = new Mock<IUsuarioAdminService>();
-            controller = new UserController(mockUsuarioAdminService.Object);
+            mockMapper = new Mock<IMapper>();
+            controller = new UserController(mockUsuarioAdminService.Object, mockMapper.Object);
         }
 
         [Fact]
