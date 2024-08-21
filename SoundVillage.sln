@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Repository", "SoundVillage.Repository\SoundVillage.Repository.csproj", "{0D612FA2-2A4F-4539-87E3-EFE4346455B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Api", "SoundVillage.Api\SoundVillage.Api.csproj", "{26A0C884-E2C1-425A-B83A-8808E0DB3594}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C9A5189F-860F-4252-BBFD-437AB2472FC4} = {C9A5189F-860F-4252-BBFD-437AB2472FC4}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoundVillage.Application", "SoundVillage.Application\SoundVillage.Application.csproj", "{346BEEB1-8CF0-4952-BD9D-6E7A713C3E18}"
 EndProject
