@@ -7,7 +7,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles ="soundvillage-user")]
+    [Authorize(Roles ="soundvillage-user")]
     public class UserController : ControllerBase
     {
         private UsuarioService _usuarioService;
@@ -16,17 +16,6 @@ namespace SoundVillage.Api.Controllers
         {
             _usuarioService = usuarioService;
         }
-
-        //[HttpPost]
-        //public IActionResult Criar(UsuarioDto dto)
-        //{
-        //    if (ModelState is { IsValid: false})
-        //        return BadRequest();
-           
-        //    var result = this._usuarioService.Criar(dto);
-
-        //    return Ok(result);
-        //}
 
         [HttpPost]
         public IActionResult Criar(UsuarioFormDto usuarioForm)

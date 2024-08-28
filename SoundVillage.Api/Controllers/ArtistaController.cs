@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Api.Controllers.Request;
 using SoundVillage.Application.Dto;
@@ -10,6 +11,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "soundvillage-user")]
     public class ArtistaController : ControllerBase
     {
         private ArtistaService _artistaService;

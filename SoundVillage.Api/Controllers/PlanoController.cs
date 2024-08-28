@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SoundVillage.Application.Streaming;
 using SoundVillage.Repository;
 
@@ -6,6 +7,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "soundvillage-user")]
     public class PlanoController : Controller
     {
         private PlanoService _planoService;
