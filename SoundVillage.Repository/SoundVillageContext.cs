@@ -40,6 +40,8 @@ namespace SoundVillage.Repository
                 .HasOne(m => m.Album)
                 .WithMany(a => a.Musicas)
                 .HasForeignKey(m => m.AlbumId);
+            
+            DatabaseSeed.Seed(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

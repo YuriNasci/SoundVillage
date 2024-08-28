@@ -13,5 +13,6 @@ namespace SoundVillage.Domain.Streaming.Agreggates
 
         public virtual RecorrenciaPlano Recorrencia { get; set; }
         public virtual ContaBancaria ContaBancariaCobradora { get; set; }
+        public Guid ContaBancariaId { get; set; }
     }
 }
