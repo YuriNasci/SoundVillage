@@ -27,6 +27,8 @@ env:
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - SoundVillage.Api/**
   workflow_dispatch:
 
 permissions:
