@@ -11,7 +11,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "soundvillage-user")]
+    //[Authorize(Roles = "soundvillage-user")]
     public class ArtistaController : ControllerBase
     {
         private ArtistaService _artistaService;
@@ -22,16 +22,16 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetArtistas()
+        public async Task<IActionResult> GetArtistas()
         {
-            var result = this._artistaService.Obter();
+            var result = await this._artistaService.Obter();
 
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetArtistas(Guid id) {
-            var result = this._artistaService.Obter(id);
+        public async Task<IActionResult> GetArtistas(Guid id) {
+            var result = await this._artistaService.Obter(id);
 
             if (result == null)
             {
@@ -42,32 +42,32 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] ArtistaDto dto)
+        public async Task<IActionResult> Criar([FromBody] ArtistaDto dto)
         {
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
-            var result = this._artistaService.Criar(dto);
+            var result = await this._artistaService.Criar(dto);
 
             return Created($"/Artista/{result.Id}", result);
         }
 
         [HttpPost("{id}/albums")]
-        public IActionResult AssociarAlbum(AlbumDto dto)
+        public async Task<IActionResult> AssociarAlbum(AlbumDto dto)
         {
             if (ModelState is { IsValid: false })
                 return BadRequest();
 
-            var result = this._artistaService.AssociarAlbum(dto);
+            var result = await this._artistaService.AssociarAlbum(dto);
 
             return Created($"/Artista/{result.ArtistaId}/albums/{result.Id}", result);
 
         }
 
         [HttpGet("{idArtista}/albums/{id}")]
-        public IActionResult ObterAlbumPorId(Guid idArtista, Guid id)
+        public async Task<IActionResult> ObterAlbumPorId(Guid idArtista, Guid id)
         {
-            var result = this._artistaService.ObterAlbumPorId(idArtista, id);
+            var result = await this._artistaService.ObterAlbumPorId(idArtista, id);
 
             if (result == null)
                 return NotFound();
@@ -76,9 +76,9 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpGet("{idBanda}/albums")]
-        public IActionResult ObterAlbuns(Guid idBanda)
+        public async Task<IActionResult> ObterAlbuns(Guid idBanda)
         {
-            var result = this._artistaService.ObterAlbum(idBanda);
+            var result = await this._artistaService.ObterAlbum(idBanda);
 
             if (result == null)
                 return NotFound();

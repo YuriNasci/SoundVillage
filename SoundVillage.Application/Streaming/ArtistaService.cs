@@ -9,45 +9,46 @@ using SoundVillage.Repository.Repository;
 using System.Diagnostics.Eventing.Reader;
 using static SoundVillage.Application.Dto.AlbumDto;
 using Album = SoundVillage.Domain.Streaming.Aggregates.Album;
+using Artista = SoundVillage.Domain.Streaming.Aggregates.Artista;
 
 namespace SoundVillage.Application.Streaming
 {
-    public class ArtistaService : IArtistaService
+    public class ArtistaService
     {
-        private IArtistaRepository ArtistaRepository { get; set; }
+        private ArtistaRepository ArtistaRepository { get; set; }
         private IUsuarioRepository UsuarioRepository { get; set; }
         private IMapper Mapper { get; set; }
 
-        public ArtistaService(IArtistaRepository artistaRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
+        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
         {
             ArtistaRepository = artistaRepository;
             Mapper = mapper;
             UsuarioRepository = usuarioRepository;
         }
 
-        public ArtistaDto Criar(ArtistaDto dto)
+        public async Task<ArtistaDto> Criar(ArtistaDto dto)
         {
             Domain.Streaming.Aggregates.Artista artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(dto);
-            this.ArtistaRepository.Save(artista);
+            await this.ArtistaRepository.SaveOrUpate<Artista>(artista, artista.ArtistaKey);
 
             return this.Mapper.Map<ArtistaDto>(artista);
         }
 
-        public ArtistaDto Obter(Guid id)
+        public async Task<ArtistaDto> Obter(Guid id)
         {
-            var artista = this.ArtistaRepository.GetById(id);
+            var artista = await this.ArtistaRepository.ReadItem<Artista>(id.ToString());
             return this.Mapper.Map<ArtistaDto>(artista);
         }
 
-        public IEnumerable<ArtistaDto> Obter()
+        public async Task<IEnumerable<ArtistaDto>> Obter()
         {
-            var Artista = this.ArtistaRepository.GetAll();
+            var Artista = await this.ArtistaRepository.ReadAllItem<Artista>();
             return this.Mapper.Map<IEnumerable<ArtistaDto>>(Artista);
         }
 
-        public AlbumDto AssociarAlbum(AlbumDto dto)
+        public async Task<AlbumDto> AssociarAlbum(AlbumDto dto)
         {
-            var Artista = this.ArtistaRepository.GetById(dto.ArtistaId);
+            var Artista = await this.ArtistaRepository.ReadItem<Artista>(dto.ArtistaId.ToString());
 
             if (Artista == null)
             {
@@ -58,7 +59,7 @@ namespace SoundVillage.Application.Streaming
 
             Artista.AdicionarAlbum(novoAlbum);
 
-            this.ArtistaRepository.Update(Artista);
+            await this.ArtistaRepository.SaveOrUpate<Artista>(Artista, Artista.ArtistaKey);
 
             var result = this.Mapper.Map<AlbumDto>(novoAlbum);
 
@@ -66,9 +67,9 @@ namespace SoundVillage.Application.Streaming
 
         }
 
-        public AlbumDto ObterAlbumPorId(Guid idArtista, Guid id)
+        public async Task<AlbumDto> ObterAlbumPorId(Guid idArtista, Guid id)
         {
-            var Artista = this.ArtistaRepository.GetById(idArtista);
+            var Artista = await this.ArtistaRepository.ReadItem<Artista>(idArtista.ToString());
 
             if (Artista == null)
             {
@@ -86,9 +87,9 @@ namespace SoundVillage.Application.Streaming
 
         }
 
-        public List<AlbumDto> ObterAlbum(Guid idBanda)
+        public async Task<List<AlbumDto>> ObterAlbum(Guid idBanda)
         {
-            var banda = this.ArtistaRepository.GetById(idBanda);
+            var banda = await this.ArtistaRepository.ReadItem<Artista>(idBanda.ToString());
 
             if (banda == null)
             {
@@ -147,9 +148,9 @@ namespace SoundVillage.Application.Streaming
             return dto;
         }
 
-        public List<AlbumFavoritoDto> ObterAlbum(string usuarioId, string artistaId)
+        public async Task<List<AlbumFavoritoDto>> ObterAlbum(string usuarioId, string artistaId)
         {
-            var banda = this.ArtistaRepository.GetById(Guid.Parse(artistaId));
+            Artista banda = await ArtistaRepository.ReadItem<Artista>(artistaId.ToString());
 
             if (banda == null)
             {
@@ -191,9 +192,9 @@ namespace SoundVillage.Application.Streaming
             return dto;
         }
 
-        public IEnumerable<ArtistaItemDto> ObterTodos()
+        public async Task<IEnumerable<ArtistaItemDto>> ObterTodos()
         {
-            var result = ArtistaRepository.GetAll();
+            var result = await this.ArtistaRepository.ReadAllItem<Artista>();
 
             return Mapper.Map<IEnumerable<ArtistaItemDto>>(result);
         }
@@ -201,20 +202,12 @@ namespace SoundVillage.Application.Streaming
         public void Salvar(ArtistaDto artistaFormDto)
         {
             var artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(artistaFormDto);
-            if (artistaFormDto.Id == Guid.Empty)
-            {
-                this.ArtistaRepository.Save(artista);
-            }
-            else
-            {
-                this.ArtistaRepository.Update(artista);
-            }
+            Task.WaitAll(this.ArtistaRepository.SaveOrUpate<Artista>(artista, artista.ArtistaKey));
         }
 
         public void Excluir(Guid id)
         {
-            var artista = this.ArtistaRepository.GetById(id);
-            this.ArtistaRepository.Delete(artista);
+            Task.WaitAll(this.ArtistaRepository.Delete<Artista>(id.ToString(), new Artista().ArtistaKey));
         }
     }
 }

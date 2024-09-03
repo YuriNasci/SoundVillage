@@ -1,12 +1,12 @@
-﻿using SoundVillage.Domain.Streaming.Aggregates;
-using SoundVillage.Repository.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace SoundVillage.Repository.Repository
 {
-    public class ArtistaRepository: RepositoryBase<Artista>, IArtistaRepository
+    public class ArtistaRepository : CosmosDBContext
     {
-        public ArtistaRepository(SoundVillageContext context): base(context) { 
-            
+        public ArtistaRepository(IConfiguration configuration) : base(configuration)
+        {
+            this.SetContainer("artista");
         }
     }
 }

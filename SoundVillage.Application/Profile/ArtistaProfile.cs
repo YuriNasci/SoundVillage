@@ -13,6 +13,8 @@ namespace SoundVillage.Application.Profile
 
             CreateMap<AlbumDto, Album>()
                 .ReverseMap();
+
+            CreateMap<AlbumDto.MusicDto, Musica>().ReverseMap();
         }
     }
 }

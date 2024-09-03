@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace SoundVillage.Domain.Streaming.ValueObject
 {
-    public record Duracao
+    public class Duracao
     {
         public int Valor { get; private set; }
 
+        public Duracao() { }
+
+        [JsonConstructor]
         public Duracao(int valor)
         {
             if (valor < 0)
