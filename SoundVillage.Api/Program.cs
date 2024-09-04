@@ -9,6 +9,7 @@ using SoundVillage.Repository;
 using SoundVillage.Repository.Repository;
 using SoundVillage.Repository.Interfaces;
 using SoundVillage.Application.Profile;
+using SoundVillage.Application.Streaming.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +88,7 @@ builder.Services.AddScoped<ArtistaService>();
 builder.Services.AddScoped<PlanoService>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<MusicaService>();
+builder.Services.AddScoped<AzureStorageAccount>();
 
 var app = builder.Build();
 

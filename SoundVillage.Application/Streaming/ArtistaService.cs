@@ -2,6 +2,7 @@
 using SoundVillage.Application.Admin.Dto;
 using SoundVillage.Application.Dto;
 using SoundVillage.Application.Interface;
+using SoundVillage.Application.Streaming.Storage;
 using SoundVillage.Domain.Streaming.Aggregates;
 using SoundVillage.Repository.Interfaces;
 using SoundVillage.Repository.Migrations;
@@ -18,19 +19,23 @@ namespace SoundVillage.Application.Streaming
         private ArtistaRepository ArtistaRepository { get; set; }
         private IUsuarioRepository UsuarioRepository { get; set; }
         private IMapper Mapper { get; set; }
+        private AzureStorageAccount AzureStorageAccount { get; set; }
 
-        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
+        public ArtistaService(ArtistaRepository artistaRepository, IMapper mapper, IUsuarioRepository usuarioRepository, AzureStorageAccount azureStorageAccount)
         {
             ArtistaRepository = artistaRepository;
             Mapper = mapper;
             UsuarioRepository = usuarioRepository;
+            AzureStorageAccount = azureStorageAccount;
         }
 
         public async Task<ArtistaDto> Criar(ArtistaDto dto)
         {
             Domain.Streaming.Aggregates.Artista artista = this.Mapper.Map<Domain.Streaming.Aggregates.Artista>(dto);
-            await this.ArtistaRepository.SaveOrUpate<Artista>(artista, artista.ArtistaKey);
+            var urlBackdrop = await this.AzureStorageAccount.UploadImage(dto.Backdrop);
+            artista.Backdrop = urlBackdrop;
 
+            await this.ArtistaRepository.SaveOrUpate(artista, artista.ArtistaKey);
             return this.Mapper.Map<ArtistaDto>(artista);
         }
 
