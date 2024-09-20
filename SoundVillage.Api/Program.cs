@@ -13,12 +13,8 @@ using SoundVillage.Application.Streaming.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
@@ -73,7 +69,7 @@ builder.Services.AddAuthorization(options =>
 
 IdentityModelEventSource.ShowPII = true;
 
-//Repositories
+#region Repositories
 builder.Services.AddScoped<ContaStreamingRepository>();
 builder.Services.AddScoped<PlanoRepository>();
 builder.Services.AddScoped<ArtistaRepository>();
@@ -81,24 +77,23 @@ builder.Services.AddScoped<CartaoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IMusicaRepository, MusicaRepository>();
 builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+#endregion
 
-//Services
+#region Services
 builder.Services.AddScoped<ContaStreamingService>();
 builder.Services.AddScoped<ArtistaService>();
 builder.Services.AddScoped<PlanoService>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<MusicaService>();
 builder.Services.AddScoped<AzureStorageAccount>();
+#endregion
 
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
