@@ -57,7 +57,7 @@ builder.Services.AddAutoMapper(typeof(ArtistaProfile).Assembly);
 builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
     .AddIdentityServerAuthentication(options =>
     {
-        options.Authority = "https://localhost:7285";
+        options.Authority = builder.Configuration["IdentityServer:Authority"];
         options.ApiName = "soundvillage-api";
         options.ApiSecret = "SoundVillageSecret";
         options.RequireHttpsMetadata = true;
