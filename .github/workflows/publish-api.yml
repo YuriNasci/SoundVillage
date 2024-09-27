@@ -88,6 +88,7 @@ jobs:
         env:
           CosmosConnection.TokenCredential: ${{ secrets.SOUNDVILLAGE_COSMOS_TOKEN }}
           AzureStorageAccount.AccessKey: ${{ secrets.SOUNDVILLAGE_STORAGE_ACCESS_KEY }}
+          AzureServiceBus.ConnectionString: ${{ secrets.SERVICE_BUS_KEY }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp

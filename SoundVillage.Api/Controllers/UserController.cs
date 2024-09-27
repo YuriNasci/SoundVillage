@@ -7,7 +7,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="soundvillage-user")]
+    [AllowAnonymous]
     public class UserController : ControllerBase
     {
         private UsuarioService _usuarioService;
@@ -41,7 +41,7 @@ namespace SoundVillage.Api.Controllers
         }
 
         [HttpPost("login")] 
-        public IActionResult Login([FromBody] Request.LoginRequest login)
+        public IActionResult Login(Request.LoginRequest login)
         {
             if (ModelState.IsValid == false)
                 return BadRequest();
