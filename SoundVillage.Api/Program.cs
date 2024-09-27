@@ -87,6 +87,7 @@ builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<MusicaService>();
 builder.Services.AddScoped<AzureStorageAccount>();
 builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddScoped<AzureServiceBusService>();
 #endregion
 
 var app = builder.Build();
