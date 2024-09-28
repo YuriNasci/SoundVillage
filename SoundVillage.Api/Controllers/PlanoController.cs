@@ -7,7 +7,7 @@ namespace SoundVillage.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "soundvillage-user")]
+    [Authorize(Roles = "soundvillage-user")]
     public class PlanoController : Controller
     {
         private PlanoService _planoService;
