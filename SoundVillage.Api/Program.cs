@@ -56,7 +56,7 @@ builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.Authenti
         options.Authority = builder.Configuration["IdentityServer:Authority"];
         options.ApiName = "soundvillage-api";
         options.ApiSecret = "SoundVillageSecret";
-        options.RequireHttpsMetadata = true;
+        options.RequireHttpsMetadata = false;
     });
 
 builder.Services.AddAuthorization(options =>
